@@ -1,0 +1,226 @@
+---
+name: Backlog Limits Checker
+on:
+  schedule:
+  - cron: '*/10 * * * *'
+
+jobs:
+  check_suse_qa_c_backlog_limits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: prepare output md file
+        run: |
+          rm -f index.md
+          touch index.md
+          python backlog_checker.py init
+      - name: check urgent priority containers backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Urgent Priority: Containers"
+          category: "Pickup time alerts"
+          header: "Urgent Priority"
+      - name: check urgent priority jeos backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Urgent Priority: JeOS"
+      - name: check urgent priority wicked backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Urgent Priority: Wicked"
+      - name: check urgent priority wsl backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Urgent Priority: WSL"
+      - name: check urgent priority public cloud backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Urgent Priority: Public Cloud"
+      - name: check high priority containers backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "High Priority: Containers"
+          header: "High Priority"
+      - name: check high priority jeos backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "High Priority: JeOS"
+      - name: check high priority wicked backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "High Priority: Wicked"
+      - name: check high priority wsl backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "High Priority: WSL"
+      - name: check high priority public cloud backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "High Priority: Public Cloud"
+      - name: check normal priority containers backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Normal Priority: Containers"
+          header: "Normal Priority"
+      - name: check normal priority jeos backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Normal Priority: JeOS"
+      - name: check normal priority wicked backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Normal Priority: Wicked"
+      - name: check normal priority wsl backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Normal Priority: WSL"
+      - name: check normal priority public cloud backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Normal Priority: Public Cloud"
+      - name: check not changed in 15 days containers backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Changed: Containers"
+          category: "No Changes in 15 Days"
+      - name: check not changed in 15 days jeos backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Changed: JeOS"
+      - name: check not changed in 15 days wicked backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Changed: Wicked"
+      - name: check not changed in 15 days wsl backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Changed: WSL"
+      - name: check not changed in 15 days public cloud backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Changed: Public Cloud"
+      - name: check in progress not assigned containers backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Assigned: Containers"
+          category: "Abnormalities"
+          header: "In Progress But Not Assigned"
+      - name: check in progress not assigned jeos backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Assigned: JeOS"
+      - name: check in progress not assigned wicked backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Assigned: Wicked"
+      - name: check in progress not assigned wsl backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Assigned: WSL"
+      - name: check in progress not assigned cloud backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Assigned: Public Cloud"
+      - name: Commit files
+        if: always()
+        run: |
+          rm -f README.md
+          mv index.md README.md
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add README.md
+          git commit --amend --no-edit
+      - name: Push changes
+        if: always()
+        uses: ad-m/github-push-action@master
+        with:
+          force: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
