@@ -171,6 +171,47 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: Public Cloud"
+
+
+      - name: check not changed in 15 days containers backlog length (Bloked and Feedback)
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Changed: Containers (Bloked and Feedback)"
+          category: "No Changes in 15 Days (Bloked and Feedback)"
+      - name: check not changed in 15 days jeos backlog length (Bloked and Feedback)
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Changed: JeOS (Bloked and Feedback)"
+      - name: check not changed in 15 days wicked backlog length (Bloked and Feedback)
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Changed: Wicked (Bloked and Feedback)"
+      - name: check not changed in 15 days wsl backlog length (Bloked and Feedback)
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Changed: WSL (Bloked and Feedback)"
+      - name: check not changed in 15 days public cloud backlog length (Bloked and Feedback)
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Not Changed: Public Cloud (Bloked and Feedback)"
+
+
+
       - name: check in progress not assigned containers backlog length
         if: always()
         run: |
