@@ -1,6 +1,6 @@
 ---
 name: Backlog Limits Checker
-on:
+on: 
   #[push]
   schedule:
   - cron: '*/10 * * * *'
@@ -27,6 +27,8 @@ jobs:
           rm -f index.md
           touch index.md
           python backlog_checker.py init
+
+      # Urgent prioities timeout
       - name: check urgent priority containers backlog length
         if: always()
         run: |
@@ -64,6 +66,8 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Urgent Priority: Public Cloud"
+      
+      # High prioities timeout
       - name: check high priority containers backlog length
         if: always()
         run: |
@@ -100,6 +104,8 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "High Priority: Public Cloud"
+      
+      # Normal prioities timeout
       - name: check normal priority containers backlog length
         if: always()
         run: |
@@ -136,6 +142,8 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Normal Priority: Public Cloud"
+
+      # No Changes in 15 days
       - name: check not changed in 15 days containers backlog length
         if: always()
         run: |
@@ -173,46 +181,48 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: Public Cloud"
 
-
-      - name: check not changed in 15 days containers backlog length (Bloked and Feedback)
+      # No changes in 15 days (Blocked and Feedback)
+      - name: check not changed in 15 days containers backlog length (Blocked and Feedback)
         if: always()
         run: |
           python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: Containers (Bloked and Feedback)"
-          category: "No Changes in 15 Days (Bloked and Feedback)"
-      - name: check not changed in 15 days jeos backlog length (Bloked and Feedback)
+          query: "Not Changed: Containers (Blocked and Feedback)"
+          category: "No Changes in 15 Days (Blocked and Feedback)"
+      - name: check not changed in 15 days jeos backlog length (Blocked and Feedback)
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: JeOS (Bloked and Feedback)"
-      - name: check not changed in 15 days wicked backlog length (Bloked and Feedback)
+          query: "Not Changed: JeOS (Blocked and Feedback)"
+      - name: check not changed in 15 days wicked backlog length (Blocked and Feedback)
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: Wicked (Bloked and Feedback)"
-      - name: check not changed in 15 days wsl backlog length (Bloked and Feedback)
+          query: "Not Changed: Wicked (Blocked and Feedback)"
+      - name: check not changed in 15 days wsl backlog length (Blocked and Feedback)
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: WSL (Bloked and Feedback)"
-      - name: check not changed in 15 days public cloud backlog length (Bloked and Feedback)
+          query: "Not Changed: WSL (Blocked and Feedback)"
+      - name: check not changed in 15 days public cloud backlog length (Blocked and Feedback)
         if: always()
         run: |
           python backlog_checker.py tb_end
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: Public Cloud (Bloked and Feedback)"
+          query: "Not Changed: Public Cloud (Blocked and Feedback)"
 
-
-
+      #
+      # Abnormalities
+      #
+      # In progress but not Assigned
       - name: check in progress not assigned containers backlog length
         if: always()
         run: |
@@ -251,6 +261,7 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Assigned: Public Cloud"
 
+      # Assigned but not started
       - name: check in progress assigned but not started containers backlog length
         if: always()
         run: |
@@ -283,11 +294,50 @@ jobs:
       - name: check in progress assigned but not started public cloud backlog length
         if: always()
         run: |
-          python backlog_checker.py
+          python backlog_checker.py tb_end
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Assigned but not started: Public Cloud"
 
+      # Coordination without subtasks
+      - name: check in progress coordination without subtasks containers backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Coordination with no subtasks: Containers"
+          header: "Coordination without subtasks"
+      - name: check in progress coordination without subtasks jeos backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Coordination with no subtasks: JeOS"
+      - name: check in progress coordination without subtasks wicked backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Coordination with no subtasks: Wicked"
+      - name: check in progress coordination without subtasks wsl backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Coordination with no subtasks: WSL"
+      - name: check in progress coordination without subtasks public cloud backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Coordination with no subtasks: Public Cloud"
+
+      # Commit
       - name: Commit files
         if: always()
         run: |
