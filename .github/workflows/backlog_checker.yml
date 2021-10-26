@@ -250,6 +250,44 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Assigned: Public Cloud"
+
+      - name: check in progress assigned but not started containers backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Assigned but not started: Containers"
+          header: "Assigned but not started"
+      - name: check in progress assigned but not started jeos backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Assigned but not started: JeOS"
+      - name: check in progress assigned but not started wicked backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Assigned but not started: Wicked"
+      - name: check in progress assigned but not started wsl backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Assigned but not started: WSL"
+      - name: check in progress assigned but not started public cloud backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Assigned but not started: Public Cloud"
+
       - name: Commit files
         if: always()
         run: |
