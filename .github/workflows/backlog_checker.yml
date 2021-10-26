@@ -1,6 +1,7 @@
 ---
 name: Backlog Limits Checker
 on:
+  #[push]
   schedule:
   - cron: '*/10 * * * *'
 
