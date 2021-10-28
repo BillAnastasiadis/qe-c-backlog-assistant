@@ -1,7 +1,6 @@
 ---
 name: Backlog Limits Checker
-on: 
-  #[push]
+on:
   schedule:
   - cron: '*/10 * * * *'
 
@@ -336,6 +335,47 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Coordination with no subtasks: Public Cloud"
+      - name: check container epics
+        if: always()
+        run: |
+          python backlog_checker.py epic
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Epics Containers"
+          category: "Epics"
+          header: "Container Epics"
+      - name: check jeos epics
+        if: always()
+        run: |
+          python backlog_checker.py epic
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Epics JeOS"
+          header: "JeOS Epics"
+      - name: check wicked epics
+        if: always()
+        run: |
+          python backlog_checker.py epic
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Epics Wicked"
+          header: "Wicked Epics"
+      - name: check wsl epics
+        if: always()
+        run: |
+          python backlog_checker.py epic
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Epics WSL"
+          header: "WSL Epics"
+      - name: check public cloud epics
+        if: always()
+        run: |
+          python backlog_checker.py epic
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Epics Public Cloud"
+          header: "Public Cloud Epics"
 
       # Commit
       - name: Commit files

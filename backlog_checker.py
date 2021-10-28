@@ -30,9 +30,9 @@ def initialize_md():
 
 
 # Append individual results to md file
-def results_to_md(item, number, limits, status):
+def results_to_md(a, b, c, d):
     with open("index.md", "a") as md:
-        md.write("| " + item + " | " + number + " | " + limits + " | " + status + "\n")
+        md.write("| " + a + " | " + b + " | " + c + " | " + d + "\n")
 
 
 def category_to_md(category):
@@ -54,6 +54,12 @@ def table_header_to_md():
 def table_end_to_md():
     with open("index.md", "a") as md:
         md.write("\n\n")
+
+
+def epic_header_to_md():
+    with open("index.md", "a") as md:
+        md.write(
+            "Epic | Status | Start Date | Done Ratio\n--- | --- | --- | ---\n")
 
 
 # Customizable check function
@@ -88,9 +94,45 @@ def gha_check():
         table_end_to_md()
 
 
-functions = {name: obj for name, obj in getmembers(sys.modules[__name__]) if (isfunction(
-    obj) and name.startswith("gha"))}
+# Customizable check function
+def gha_epics():
+    initialize_queries()
+    key = os.environ['key']
+    query = os.environ['query']
+    if "category" in os.environ:
+        category_to_md(os.environ["category"])
+    header_to_md(os.environ["header"])
+    answer = requests.get(
+        f"{query_links[query].replace('issues', 'issues.json')}"
+        + f"&key={key}")
+    root = json.loads(answer.content)
+    issue_count = int(root["total_count"])
+    if issue_count <= 0:
+        with open("index.md", "a") as md:
+            md.write("\n\nNo active epics for this project\n\n")
+    else:
+        epic_header_to_md()
+        for issue in root['issues']:
+            epic_issue = "https://progress.opensuse.org/issues/" + str(issue['id'])
+            subject = issue['subject']
+            subject = subject.replace("[epic]", "").replace("[", "{").replace("]",
+                                                                              "}").replace(
+                "(", "{").replace(")", "}")
+            if len(subject) > 53:
+                subject = subject[:50] + "..."
+            print(issue['status']['name'])
+            start = issue['start_date'] if 'start_date' in issue else "-"
+            if "done_ratio" in issue:
+                done = str(issue['done_ratio']) + "%"
+            else:
+                done = "-"
+            results_to_md(f"[{subject}]({epic_issue})", issue['status']['name'], start, done)
+        table_end_to_md()
+
+
 if "init" in sys.argv:
     initialize_md()
+elif "epic" in sys.argv:
+    gha_epics()
 else:
     gha_check()
