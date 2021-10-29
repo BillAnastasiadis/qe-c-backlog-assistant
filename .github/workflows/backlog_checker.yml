@@ -298,6 +298,44 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Assigned but not started: Public Cloud"
 
+      # New tickets
+      - name: check new containers backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "New: Containers"
+          header: "New tickets"
+      - name: check new jeos backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "New: JeOS"
+      - name: check new wicked backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "New: Wicked"
+      - name: check new wsl backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "New: WSL"
+      - name: check new public cloud backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "New: Public Cloud"
+
       # Coordination without subtasks
       - name: check in progress coordination without subtasks containers backlog length
         if: always()
@@ -335,6 +373,8 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Coordination with no subtasks: Public Cloud"
+
+      # Epics
       - name: check container epics
         if: always()
         run: |
