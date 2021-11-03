@@ -67,7 +67,7 @@ Backlog Query | Number of Issues | Ideal Number | Status
 **In Progress But Not Assigned**
 Backlog Query | Number of Issues | Ideal Number | Status
 --- | --- | --- | ---
-| [Not Assigned: Containers]( https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=2&f%5B%5D=assigned_to_id&op%5Bassigned_to_id%5D=%21*&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
+| [Not Assigned: Containers]( https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=2&f%5B%5D=assigned_to_id&op%5Bassigned_to_id%5D=%21*&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 1 | 0 | &#x1F534;
 | [Not Assigned: JeOS]( https://progress.opensuse.org/projects/jeos/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=2&f%5B%5D=assigned_to_id&op%5Bassigned_to_id%5D=%21*&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
 | [Not Assigned: SLE Micro]( https://progress.opensuse.org/projects/suse_microos/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=2&f%5B%5D=assigned_to_id&op%5Bassigned_to_id%5D=%21*&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
 | [Not Assigned: WSL]( https://progress.opensuse.org/projects/wsl/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=2&f%5B%5D=assigned_to_id&op%5Bassigned_to_id%5D=%21*&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
@@ -114,7 +114,15 @@ Backlog Query | Number of Issues | Ideal Number | Status
 Epic | Status | Start Date | Done Ratio
 --- | --- | --- | ---
 | [ Test images on the container engines of the Publi...](https://progress.opensuse.org/issues/97553) | Workable | 2021-08-30 | 50%
+<<<<<<< HEAD
 | [ Refactor container tests](https://progress.opensuse.org/issues/90086) | In Progress | 2021-01-28 | 42%
+=======
+<<<<<<< HEAD
+| [ Refactor container tests](https://progress.opensuse.org/issues/90086) | In Progress | 2021-01-28 | 42%
+=======
+| [ Refactor container tests](https://progress.opensuse.org/issues/90086) | In Progress | 2021-01-28 | 27%
+>>>>>>> 6206801 (Fix cronjob configuration)
+>>>>>>> 6f4d04c (Fix cronjob configuration)
 
 
 **JeOS Epics**
