@@ -27,8 +27,171 @@ jobs:
           touch index.md
           python backlog_checker.py init
 
-      # Urgent prioities timeout
+      # Backlog lengths : Containers
       - name: check urgent priority containers backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Urgent Priority Length: Containers"
+          header: "Containers"
+          category: "Backlog Lengths by priority"
+          max_level: 1
+      - name: check high priority containers backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "High Priority Length: Containers"
+          max_level: 3
+      - name: check normal priority containers backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Normal Priority Length: Containers"
+          max_level: 20
+
+      # Backlog lengths : JeOS
+      - name: check urgent priority JeOS backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Urgent Priority Length: JeOS"
+          header: "JeOS"
+          max_level: 1
+      - name: check high priority JeOS backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "High Priority Length: JeOS"
+          max_level: 3
+      - name: check normal priority JeOS backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Normal Priority Length: JeOS"
+          max_level: 20
+
+      # Backlog lengths : WSL
+      - name: check urgent priority WSL backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Urgent Priority Length: WSL"
+          header: "WSL"
+          max_level: 1
+      - name: check high priority WSL backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "High Priority Length: WSL"
+          max_level: 3
+      - name: check normal priority WSL backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Normal Priority Length: WSL"
+          max_level: 20
+
+      # Backlog lengths : SLE Micro
+      - name: check urgent priority SLE Micro backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Urgent Priority Length: SLE Micro"
+          header: "SLE Micro"
+          max_level: 1
+      - name: check high priority SLE Micro backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "High Priority Length: SLE Micro"
+          max_level: 3
+      - name: check normal priority SLE Micro backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Normal Priority Length: SLE Micro"
+          max_level: 20
+
+      # Backlog lengths : Public Cloud
+      - name: check urgent priority Public Cloud backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Urgent Priority Length: Public Cloud"
+          header: "Public Cloud"
+          max_level: 1
+      - name: check high priority Public Cloud backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "High Priority Length: Public Cloud"
+          max_level: 3
+      - name: check normal priority Public Cloud backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Normal Priority Length: Public Cloud"
+          max_level: 20
+
+      # Backlog lengths : Wicked
+      - name: check urgent priority Wicked backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Urgent Priority Length: Wicked"
+          header: "Wicked"
+          max_level: 1
+      - name: check high priority Wicked backlog length
+        if: always()
+        run: |
+          python backlog_checker.py
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "High Priority Length: Wicked"
+          max_level: 3
+      - name: check normal priority Wicked backlog length
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Normal Priority Length: Wicked"
+          max_level: 20
+
+      # Urgent prioities timeout
+      - name: check urgent priority containers backlog timeout
         if: always()
         run: |
           python backlog_checker.py tb_start
@@ -37,35 +200,35 @@ jobs:
           query: "Urgent Priority: Containers"
           category: "Pickup time alerts"
           header: "Urgent Priority"
-      - name: check urgent priority jeos backlog length
+      - name: check urgent priority jeos backlog timeout
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Urgent Priority: JeOS"
-      - name: check urgent priority SLE Micro backlog length
+      - name: check urgent priority SLE Micro backlog timeout
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Urgent Priority: SLE Micro"
-      - name: check urgent priority wsl backlog length
+      - name: check urgent priority wsl backlog timeout
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Urgent Priority: WSL"
-      - name: check urgent priority public cloud backlog length
+      - name: check urgent priority public cloud backlog timeout
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Urgent Priority: Public Cloud"
-      - name: check urgent priority wicked backlog length
+      - name: check urgent priority wicked backlog timeout
         if: always()
         run: |
           python backlog_checker.py tb_end
@@ -74,7 +237,7 @@ jobs:
           query: "Urgent Priority: Wicked"
       
       # High prioities timeout
-      - name: check high priority containers backlog length
+      - name: check high priority containers backlog timeout
         if: always()
         run: |
           python backlog_checker.py tb_start
@@ -82,35 +245,35 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "High Priority: Containers"
           header: "High Priority"
-      - name: check high priority jeos backlog length
+      - name: check high priority jeos backlog timeout
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "High Priority: JeOS"
-      - name: check high priority SLE Micro backlog length
+      - name: check high priority SLE Micro backlog timeout
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "High Priority: SLE Micro"
-      - name: check high priority wsl backlog length
+      - name: check high priority wsl backlog timeout
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "High Priority: WSL"
-      - name: check high priority public cloud backlog length
+      - name: check high priority public cloud backlog timeout
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "High Priority: Public Cloud"
-      - name: check high priority wicked backlog length
+      - name: check high priority wicked backlog timeout
         if: always()
         run: |
           python backlog_checker.py tb_end
@@ -119,7 +282,7 @@ jobs:
           query: "High Priority: Wicked"
       
       # Normal prioities timeout
-      - name: check normal priority containers backlog length
+      - name: check normal priority containers backlog timeout
         if: always()
         run: |
           python backlog_checker.py tb_start
@@ -127,35 +290,35 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Normal Priority: Containers"
           header: "Normal Priority"
-      - name: check normal priority jeos backlog length
+      - name: check normal priority jeos backlog timeout
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Normal Priority: JeOS"
-      - name: check normal priority SLE Micro backlog length
+      - name: check normal priority SLE Micro backlog timeout
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Normal Priority: SLE Micro"
-      - name: check normal priority wsl backlog length
+      - name: check normal priority wsl backlog timeout
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Normal Priority: WSL"
-      - name: check normal priority public cloud backlog length
+      - name: check normal priority public cloud backlog timeout
         if: always()
         run: |
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Normal Priority: Public Cloud"
-      - name: check normal priority wicked backlog length
+      - name: check normal priority wicked backlog timeout
         if: always()
         run: |
           python backlog_checker.py tb_end

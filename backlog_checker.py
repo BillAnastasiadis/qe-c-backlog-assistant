@@ -67,6 +67,7 @@ def gha_check():
     initialize_queries()
     key = os.environ['key']
     query = os.environ['query']
+    max_level = int(os.getenv('max_level', default = 0))
     if "category" in os.environ:
         category_to_md(os.environ["category"])
     if "header" in os.environ:
@@ -78,18 +79,18 @@ def gha_check():
         + f"&key={key}")
     root = json.loads(answer.content)
     issue_count = int(root["total_count"])
-    if issue_count > 0:
+    if issue_count > max_level:
         print(f"Backlog has {query} tickets!")
         print(f"Please check {query_links[query]}")
         results_to_md(
             f"[{query}]({query_links[query]})",
-                      str(issue_count), "0", result_icons["fail"])
+                      str(issue_count), str(max_level), result_icons["fail"])
         if "tb_end" in sys.argv:
             table_end_to_md()
         exit(1)
-    print(f"{query} length is 0, all good!")
+    print(f"{query} length is {issue_count}, all good!")
     results_to_md(f"[{query}]({query_links[query]})",
-                  "0", "0", result_icons["pass"])
+                  str(issue_count), str(max_level), result_icons["pass"])
     if "tb_end" in sys.argv:
         table_end_to_md()
 
