@@ -48,7 +48,7 @@ def header_to_md(header):
 def table_header_to_md():
     with open("index.md", "a") as md:
         md.write(
-            "Backlog Query | Number of Issues | Ideal Number | Status\n--- | --- | --- | ---\n")
+            "Backlog Query | Number of Issues | Ideal Number (min/max) | Status\n--- | --- | --- | ---\n")
 
 
 def table_end_to_md():
@@ -95,6 +95,38 @@ def gha_check():
         table_end_to_md()
 
 
+def gha_check_inverted():
+    initialize_queries()
+    key = os.environ['key']
+    query = os.environ['query']
+    min_level = int(os.getenv('min_level', default = 1))
+    if "category" in os.environ:
+        category_to_md(os.environ["category"])
+    if "header" in os.environ:
+        header_to_md(os.environ["header"])
+    if "tb_start" in sys.argv:
+        table_header_to_md()
+    answer = requests.get(
+        f"{query_links[query].replace('issues', 'issues.json')}"
+        + f"&key={key}")
+    root = json.loads(answer.content)
+    issue_count = int(root["total_count"])
+    if issue_count < min_level:
+        print(f"Backlog has {query} tickets!")
+        print(f"Please check {query_links[query]}")
+        results_to_md(
+            f"[{query}]({query_links[query]})",
+                      str(issue_count), str(min_level), result_icons["fail"])
+        if "tb_end" in sys.argv:
+            table_end_to_md()
+        exit(1)
+    print(f"{query} length is {issue_count}, all good!")
+    results_to_md(f"[{query}]({query_links[query]})",
+                  str(issue_count), str(min_level), result_icons["pass"])
+    if "tb_end" in sys.argv:
+        table_end_to_md()
+
+
 # Customizable check function
 def gha_epics():
     initialize_queries()
@@ -135,5 +167,7 @@ if "init" in sys.argv:
     initialize_md()
 elif "epic" in sys.argv:
     gha_epics()
+elif "inverted" in sys.argv:
+    gha_check_inverted()
 else:
     gha_check()
