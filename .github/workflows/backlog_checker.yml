@@ -1,9 +1,9 @@
 ---
 name: Backlog Limits Checker
 on:
-  [push]
-  #schedule:
-  #- cron: '*/10 * * * *'
+  #[push]
+  schedule:
+  - cron: '*/10 * * * *'
 
 jobs:
   check_suse_qa_c_backlog_limits:
@@ -657,7 +657,7 @@ jobs:
       - name: finished in 7 days containers
         if: always()
         run: |
-          python backlog_checker.py inverted tb_start
+          python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Finished In The Last 7 Days: Containers"
@@ -695,7 +695,7 @@ jobs:
       - name: finished in 7 days wicked
         if: always()
         run: |
-          python backlog_checker.py inverted tb_end
+          python backlog_checker.py tb_end
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Finished In The Last 7 Days: Wicked"
@@ -703,7 +703,7 @@ jobs:
       - name: finished in 30 days containers
         if: always()
         run: |
-          python backlog_checker.py inverted tb_start
+          python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Finished In The Last 30 Days: Containers"
@@ -740,10 +740,103 @@ jobs:
       - name: finished in 30 days wicked
         if: always()
         run: |
-          python backlog_checker.py inverted tb_end
+          python backlog_checker.py tb_end
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Finished In The Last 30 Days: Wicked"
+
+      # Created
+      # - 7 days
+      - name: Created in 7 days containers
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Created In The Last 7 Days: Containers"
+          header: "During the last 7 days"
+          category: "New tickets"
+      - name: Created in 7 days public_cloud
+        if: always()
+        run: |
+          python backlog_checker.py inverted
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Created In The Last 7 Days: JeOS"
+      - name: Created in 7 days public_cloud
+        if: always()
+        run: |
+          python backlog_checker.py inverted
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Created In The Last 7 Days: WSL"
+          min_level: 1
+      - name: Created in 7 days public_cloud
+        if: always()
+        run: |
+          python backlog_checker.py inverted
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Created In The Last 7 Days: Public Cloud"
+      - name: Created in 7 days sle micro
+        if: always()
+        run: |
+          python backlog_checker.py inverted
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Created In The Last 7 Days: SLE Micro"
+      - name: Created in 7 days wicked
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Created In The Last 7 Days: Wicked"
+      # - 30 days
+      - name: Created in 30 days containers
+        if: always()
+        run: |
+          python backlog_checker.py tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Created In The Last 30 Days: Containers"
+          header: "During the last 30 days"
+      - name: Created in 30 days public_cloud
+        if: always()
+        run: |
+          python backlog_checker.py inverted
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Created In The Last 30 Days: JeOS"
+      - name: Created in 30 days public_cloud
+        if: always()
+        run: |
+          python backlog_checker.py inverted
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Created In The Last 30 Days: WSL"
+          min_level: 1
+      - name: Created in 30 days public_cloud
+        if: always()
+        run: |
+          python backlog_checker.py inverted
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Created In The Last 30 Days: Public Cloud"
+      - name: Created in 30 days sle micro
+        if: always()
+        run: |
+          python backlog_checker.py inverted
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Created In The Last 30 Days: SLE Micro"
+      - name: Created in 30 days wicked
+        if: always()
+        run: |
+          python backlog_checker.py tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Created In The Last 30 Days: Wicked"
 
       # Commit
       - name: Commit files
