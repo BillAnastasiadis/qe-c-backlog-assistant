@@ -50,17 +50,23 @@ def table_header_to_md():
         md.write(
             "Backlog Query | Number of Issues | Ideal Number (min/max) | Status\n--- | --- | --- | ---\n")
 
-
 def table_end_to_md():
     with open("index.md", "a") as md:
         md.write("\n\n")
-
 
 def epic_header_to_md():
     with open("index.md", "a") as md:
         md.write(
             "Epic | Status | Start Date | Done Ratio\n--- | --- | --- | ---\n")
 
+def table_comp_header_to_md(a, b, c):
+    with open("index.md", "a") as md:
+        md.write(
+            "Backlog Query | " + a + " | " + b + " | " + c + " | Status\n--- | --- | --- | --- | ---\n")
+
+def table_comp_results_to_md(a, b, c, d, e):
+    with open("index.md", "a") as md:
+        md.write("| " + a + " | " + b + " | " + c + " | " + d + " | " + e + "\n")
 
 # Customizable check function
 def gha_check():
@@ -94,6 +100,53 @@ def gha_check():
     if "tb_end" in sys.argv:
         table_end_to_md()
 
+def gha_comp():
+    initialize_queries()
+    key = os.environ['key']
+    rowText = os.environ["rowText"]
+
+    if "category" in os.environ:
+        category_to_md(os.environ["category"])
+    if "header" in os.environ:
+        header_to_md(os.environ["header"])
+    if "tb_start" in sys.argv:
+        table_comp_header_to_md(os.environ['head1'], os.environ['head2'], os.environ['head3'])
+
+    query1 = os.environ['query1']
+    answer1 = requests.get(
+        f"{query_links[query1].replace('issues', 'issues.json')}"
+        + f"&key={key}")
+    root1 = json.loads(answer1.content)
+    issue_count_1 = int(root1["total_count"])
+
+    query2 = os.environ['query2']    
+    answer2 = requests.get(
+        f"{query_links[query2].replace('issues', 'issues.json')}"
+        + f"&key={key}")
+    root2 = json.loads(answer2.content)
+    issue_count_2 = int(root2["total_count"])
+
+    query3 = os.environ['query3']    
+    answer3 = requests.get(
+        f"{query_links[query3].replace('issues', 'issues.json')}"
+        + f"&key={key}")
+    root3 = json.loads(answer3.content)
+    issue_count_3 = int(root3["total_count"])
+
+    print(f"{rowText} where {issue_count_1} <= {issue_count_2}")
+
+    if issue_count_1 > issue_count_2:
+        table_comp_results_to_md(rowText, str(issue_count_1), str(issue_count_2), str(issue_count_3), result_icons["fail"])
+        if "tb_end" in sys.argv:
+            table_end_to_md()
+        exit(1)
+
+    print(f"{rowText} where {issue_count_1} <= {issue_count_2}, all good!")
+    table_comp_results_to_md(rowText,
+                  str(issue_count_1), str(issue_count_2), str(issue_count_3), result_icons["pass"])
+
+    if "tb_end" in sys.argv:
+        table_end_to_md()
 
 def gha_check_inverted():
     initialize_queries()
@@ -167,6 +220,8 @@ if "init" in sys.argv:
     initialize_md()
 elif "epic" in sys.argv:
     gha_epics()
+elif "comp" in sys.argv:
+    gha_comp()
 elif "inverted" in sys.argv:
     gha_check_inverted()
 else:
