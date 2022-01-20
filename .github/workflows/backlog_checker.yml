@@ -28,7 +28,7 @@ jobs:
           touch index.md
           python backlog_checker.py init
 
-      Backlog lengths : Containers
+      # Backlog lengths : Containers
       - name: check urgent priority containers backlog length
         if: always()
         run: |
@@ -652,14 +652,14 @@ jobs:
           query: "Epics Wicked"
           header: "Wicked Epics"
 
-      # Incoming vs outcome during the last 30 days
+      # Incoming vs outcoming during the last 30 days
       - name: Input vs Output ratios in 30 days Containers
         if: always()
         run: |
           python backlog_checker.py comp tb_start
         env:
-          category: "Incoming vs outcome"
-          header: "Incoming vs outcome during the last 30 days"
+          category: "Incoming vs outcoming tasks"
+          header: "Incoming vs outcoming during the last 30 days"
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "Containers"
           query1: "Created In The Last 30 Days: Containers"
@@ -739,13 +739,13 @@ jobs:
           head2: "Finished tickets"
           head3: "Backlog length"
 
-      # Incoming vs outcome during the last 7 days
+      # Incoming vs outcoming during the last 7 days
       - name: Input vs Output ratios in 7 days Containers
         if: always()
         run: |
           python backlog_checker.py comp tb_start
         env:
-          header: "Incoming vs outcome during the last 7 days"
+          header: "Incoming vs outcoming during the last 7 days"
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "Containers"
           query1: "Created In The Last 7 Days: Containers"
