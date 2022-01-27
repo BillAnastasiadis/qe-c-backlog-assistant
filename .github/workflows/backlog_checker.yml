@@ -627,73 +627,73 @@ jobs:
           head2: "Finished tickets"
           head3: "Backlog length"
 
-      # Incoming vs outcoming during the last 7 days
-      - name: Input vs Output ratios in 7 days Containers
+      # Incoming vs outcoming during the last 4 months
+      - name: Input vs Output ratios in 4 months Containers
         if: always()
         run: |
           python backlog_checker.py comp tb_start
         env:
-          header: "Incoming vs outcoming during the last 7 days"
+          header: "Incoming vs outcoming during the last 4 months"
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "Containers"
-          query1: "Created In The Last 7 Days: Containers"
-          query2: "Finished In The Last 7 Days: Containers"
+          query1: "Created In The Last 120 Days: Containers"
+          query2: "Finished In The Last 120 Days: Containers"
           query3: "Backlog Length: Containers"
           head1: "New tickets"
           head2: "Finished tickets"
           head3: "Backlog length"
 
-      - name: Input vs Output ratios in 7 days JeOS
+      - name: Input vs Output ratios in 120 days JeOS
         if: always()
         run: |
           python backlog_checker.py comp 
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "JeOS"
-          query1: "Created In The Last 7 Days: JeOS"
-          query2: "Finished In The Last 7 Days: JeOS"
+          query1: "Created In The Last 120 Days: JeOS"
+          query2: "Finished In The Last 120 Days: JeOS"
           query3: "Backlog Length: JeOS"
           head1: "New tickets"
           head2: "Finished tickets"
           head3: "Backlog length"
 
-      - name: Input vs Output ratios in 7 days WSL
+      - name: Input vs Output ratios in 120 days WSL
         if: always()
         run: |
           python backlog_checker.py comp 
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "WSL"
-          query1: "Created In The Last 7 Days: WSL"
-          query2: "Finished In The Last 7 Days: WSL"
+          query1: "Created In The Last 120 Days: WSL"
+          query2: "Finished In The Last 120 Days: WSL"
           query3: "Backlog Length: WSL"
           head1: "New tickets"
           head2: "Finished tickets"
           head3: "Backlog length"
 
-      - name: Input vs Output ratios in 7 days Public Cloud
+      - name: Input vs Output ratios in 120 days Public Cloud
         if: always()
         run: |
           python backlog_checker.py comp 
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "Public Cloud"
-          query1: "Created In The Last 7 Days: Public Cloud"
-          query2: "Finished In The Last 7 Days: Public Cloud"
+          query1: "Created In The Last 120 Days: Public Cloud"
+          query2: "Finished In The Last 120 Days: Public Cloud"
           query3: "Backlog Length: Public Cloud"
           head1: "New tickets"
           head2: "Finished tickets"
           head3: "Backlog length"
 
-      - name: Input vs Output ratios in 7 days SLE Micro
+      - name: Input vs Output ratios in 120 days SLE Micro
         if: always()
         run: |
           python backlog_checker.py comp tb_end
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "SLE Micro"
-          query1: "Created In The Last 7 Days: SLE Micro"
-          query2: "Finished In The Last 7 Days: SLE Micro"
+          query1: "Created In The Last 120 Days: SLE Micro"
+          query2: "Finished In The Last 120 Days: SLE Micro"
           query3: "Backlog Length: SLE Micro"
           head1: "New tickets"
           head2: "Finished tickets"
