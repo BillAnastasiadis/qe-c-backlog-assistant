@@ -1,9 +1,9 @@
 ---
 name: Backlog Limits Checker
 on:
-  #[push]
-  schedule:
-  - cron: '*/10 * * * *'
+  [push]
+  #schedule:
+  #- cron: '*/10 * * * *'
 
 jobs:
   check_suse_qa_c_backlog_limits:
@@ -27,6 +27,27 @@ jobs:
           rm -f index.md
           touch index.md
           python backlog_checker.py init
+
+      - name: General description
+        if: always()
+        run: |
+          python backlog_checker.py description
+        env:
+          text: |
+            This is the dashboard for Quality Engineering for Containers and Public Cloud. 
+            We are currently working on four projects: Containers, JeOS, WSL, Public Cloud and SLE Micro
+            * [General team overview](#general_team_overview)
+            * [Backlog Lengths by priority](#backlog_lengths_by_priority)
+            * [Pickup time alerts](#pickup_time_alerts)
+            * [No Changes in 15 Days](#no_changes_in_15_days)
+            * [No Changes in 15 Days (Blocked and Feedback)](#no_changes_in_15_days_blocked_and_feedback)
+            * [Abnormalities](#abnormalities)
+              * [In Progress But Not Assigned](#in_progress_but_not_assigned)
+              * [Assigned but not started](#assigned_but_not_started)
+              * [New tickets](#new_tickets)
+              * [Coordination without subtasks](#coordination_without_subtasks)
+            * [Epics](#epics)
+            * [Incoming vs outcoming tasks](#incoming_vs_outcoming_tasks)
 
       # Bugs vs Features Backlog Length
       - name: Bugs vs Features Backlog Length Containers
