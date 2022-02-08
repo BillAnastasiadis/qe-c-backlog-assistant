@@ -28,6 +28,75 @@ jobs:
           touch index.md
           python backlog_checker.py init
 
+      # Bugs vs Features Backlog Length
+      - name: Bugs vs Features Backlog Length Containers
+        if: always()
+        run: |
+          python backlog_checker.py comp2 tb_start
+        env:
+          header: "Bugs vs Features Backlog Length"
+          category: "General team overview"
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "Containers"
+          query1: "Backlog Bugs Length: Containers"
+          query2: "Backlog Features Length: Containers"
+          query3: "Backlog Length: Containers"
+          head1: "Bugs"
+          head2: "Features"
+          head3: "Total"
+      - name: Bugs vs Features Backlog Length JeOS
+        if: always()
+        run: |
+          python backlog_checker.py comp2
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "JeOS"
+          query1: "Backlog Bugs Length: JeOS"
+          query2: "Backlog Features Length: JeOS"
+          query3: "Backlog Length: JeOS"
+          head1: "Bugs"
+          head2: "Features"
+          head3: "Total"
+      - name: Bugs vs Features Backlog Length WSL
+        if: always()
+        run: |
+          python backlog_checker.py comp2
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "WSL"
+          query1: "Backlog Bugs Length: WSL"
+          query2: "Backlog Features Length: WSL"
+          query3: "Backlog Length: WSL"
+          head1: "Bugs"
+          head2: "Features"
+          head3: "Total"
+      - name: Bugs vs Features Backlog Length Public Cloud
+        if: always()
+        run: |
+          python backlog_checker.py comp2
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "Public Cloud"
+          query1: "Backlog Bugs Length: Public Cloud"
+          query2: "Backlog Features Length: Public Cloud"
+          query3: "Backlog Length: Public Cloud"
+          head1: "Bugs"
+          head2: "Features"
+          head3: "Total"
+      - name: Bugs vs Features Backlog Length SLE Micro
+        if: always()
+        run: |
+          python backlog_checker.py comp2 tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "SLE Micro"
+          query1: "Backlog Bugs Length: SLE Micro"
+          query2: "Backlog Features Length: SLE Micro"
+          query3: "Backlog Length: SLE Micro"
+          head1: "Bugs"
+          head2: "Features"
+          head3: "Total"
+
       # Backlog lengths : Containers
       - name: check urgent priority containers backlog length
         if: always()
