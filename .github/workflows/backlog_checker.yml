@@ -1,9 +1,9 @@
 ---
 name: Backlog Limits Checker
 on:
-  [push]
-  #schedule:
-  #- cron: '*/10 * * * *'
+  #[push]
+  schedule:
+  - cron: '*/10 * * * *'
 
 jobs:
   check_suse_qa_c_backlog_limits:
