@@ -1,11 +1,25 @@
 # QE-C Backlog Status
 
-**Latest Run:** 2022-02-08 18:27:00 GMT
+**Latest Run:** 2022-02-08 18:33:52 GMT
 *(Please refresh to see latest results)*
 
+This is the dashboard for Quality Engineering for Containers and Public Cloud. 
+We are currently working on four projects: Containers, JeOS, WSL, Public Cloud and SLE Micro
+* [General team overview](#general_team_overview)
+* [Backlog Lengths by priority](#backlog_lengths_by_priority)
+* [Pickup time alerts](#pickup_time_alerts)
+* [No Changes in 15 Days](#no_changes_in_15_days)
+* [No Changes in 15 Days (Blocked and Feedback)](#no_changes_in_15_days_blocked_and_feedback)
+* [Abnormalities](#abnormalities)
+  * [In Progress But Not Assigned](#in_progress_but_not_assigned)
+  * [Assigned but not started](#assigned_but_not_started)
+  * [New tickets](#new_tickets)
+  * [Coordination without subtasks](#coordination_without_subtasks)
+* [Epics](#epics)
+* [Incoming vs outcoming tasks](#incoming_vs_outcoming_tasks)
 
-# General team overview
-**Bugs vs Features Backlog Length**
+# General team overview <a name='general_team_overview'></a>
+**Bugs vs Features Backlog Length <a name='bugs_vs_features_backlog_length'></a>**
 Project | Bugs | Features | Total
 --- | --- | --- | ---
  | Containers | [ 3 (9%) ]( https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=priority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=o&f%5B%5D=issue_tags&op%5Bissue_tags%5D=%3D&v%5Bissue_tags%5D%5B%5D=bug&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=project&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=relations&c%5B%5D=parent&c%5B%5D=tags_relations&c%5B%5D=updated_on&group_by=status&t%5B%5D=) | [ 29 (91%) ]( https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=priority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=o&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=issue_tags&op%5Bissue_tags%5D=%21&v%5Bissue_tags%5D%5B%5D=bug&f%5B%5D=&c%5B%5D=subject&c%5B%5D=project&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=relations&c%5B%5D=parent&c%5B%5D=tags_relations&c%5B%5D=updated_on&group_by=status&t%5B%5D=) | [ 32 ]( https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=1&v%5Bstatus_id%5D%5B%5D=12&v%5Bstatus_id%5D%5B%5D=2&v%5Bstatus_id%5D%5B%5D=15&v%5Bstatus_id%5D%5B%5D=4&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=)
@@ -16,8 +30,8 @@ Project | Bugs | Features | Total
 
 
 
-# Backlog Lengths by priority
-**Containers**
+# Backlog Lengths by priority <a name='backlog_lengths_by_priority'></a>
+**Containers <a name='containers'></a>**
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [Urgent Priority Length: Containers](https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=6&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 1 | &#x1F49A;
@@ -25,7 +39,7 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 | [Normal Priority Length: Containers](https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=4&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 6 | 20 | &#x1F49A;
 
 
-**JeOS**
+**JeOS <a name='jeos'></a>**
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [Urgent Priority Length: JeOS](https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=6&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 1 | &#x1F49A;
@@ -33,7 +47,7 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 | [Normal Priority Length: JeOS](https://progress.opensuse.org/projects/jeos/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=4&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 6 | 20 | &#x1F49A;
 
 
-**WSL**
+**WSL <a name='wsl'></a>**
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [Urgent Priority Length: WSL](https://progress.opensuse.org/projects/wsl/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=6&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 1 | &#x1F49A;
@@ -41,7 +55,7 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 | [Normal Priority Length: WSL](https://progress.opensuse.org/projects/wsl/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=4&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 2 | 20 | &#x1F49A;
 
 
-**SLE Micro**
+**SLE Micro <a name='sle_micro'></a>**
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [Urgent Priority Length: SLE Micro](https://progress.opensuse.org/projects/microos_slemicro/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=6&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 1 | &#x1F49A;
@@ -49,7 +63,7 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 | [Normal Priority Length: SLE Micro](https://progress.opensuse.org/projects/microos_slemicro/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=4&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 5 | 20 | &#x1F49A;
 
 
-**Public Cloud**
+**Public Cloud <a name='public_cloud'></a>**
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [Urgent Priority Length: Public Cloud](https://progress.opensuse.org/projects/public_cloud/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=6&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 1 | &#x1F49A;
@@ -58,8 +72,8 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 
 
 
-# Pickup time alerts
-**Urgent Priority**
+# Pickup time alerts <a name='pickup_time_alerts'></a>
+**Urgent Priority <a name='urgent_priority'></a>**
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [Urgent Priority: Containers](https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=6&f%5B%5D=created_on&op%5Bcreated_on%5D=%3Ct-&v%5Bcreated_on%5D%5B%5D=7&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
@@ -69,7 +83,7 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 | [Urgent Priority: Public Cloud](https://progress.opensuse.org/projects/public_cloud/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=6&f%5B%5D=created_on&op%5Bcreated_on%5D=%3Ct-&v%5Bcreated_on%5D%5B%5D=7&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
 
 
-**High Priority**
+**High Priority <a name='high_priority'></a>**
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [High Priority: Containers](https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=5&f%5B%5D=created_on&op%5Bcreated_on%5D=%3Ct-&v%5Bcreated_on%5D%5B%5D=30&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
@@ -79,7 +93,7 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 | [High Priority: Public Cloud](https://progress.opensuse.org/projects/public_cloud/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=5&f%5B%5D=created_on&op%5Bcreated_on%5D=%3Ct-&v%5Bcreated_on%5D%5B%5D=30&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
 
 
-**Normal Priority**
+**Normal Priority <a name='normal_priority'></a>**
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [Normal Priority: Containers](https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=priority_id&op%5Bpriority_id%5D=%3D&v%5Bpriority_id%5D%5B%5D=4&f%5B%5D=created_on&op%5Bcreated_on%5D=%3Ct-&v%5Bcreated_on%5D%5B%5D=365&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
@@ -90,7 +104,7 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 
 
 
-# No Changes in 15 Days
+# No Changes in 15 Days <a name='no_changes_in_15_days'></a>
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [Not Changed: Containers]( https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=2&f%5B%5D=updated_on&op%5Bupdated_on%5D=%3Ct-&v%5Bupdated_on%5D%5B%5D=15&f%5B%5D=priority_id&op%5Bpriority_id%5D=%21&v%5Bpriority_id%5D%5B%5D=3&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
@@ -101,7 +115,7 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 
 
 
-# No Changes in 15 Days (Blocked and Feedback)
+# No Changes in 15 Days (Blocked and Feedback) <a name='no_changes_in_15_days_blocked_and_feedback'></a>
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [Not Changed: Containers (Blocked and Feedback)]( https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=15&v%5Bstatus_id%5D%5B%5D=4&f%5B%5D=updated_on&op%5Bupdated_on%5D=%3Ct-&v%5Bupdated_on%5D%5B%5D=15&f%5B%5D=priority_id&op%5Bpriority_id%5D=%21&v%5Bpriority_id%5D%5B%5D=3&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 6 | 0 | &#x1F534;
@@ -112,8 +126,8 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 
 
 
-# Abnormalities
-**In Progress But Not Assigned**
+# Abnormalities <a name='abnormalities'></a>
+**In Progress But Not Assigned <a name='in_progress_but_not_assigned'></a>**
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [Not Assigned: Containers]( https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=2&f%5B%5D=assigned_to_id&op%5Bassigned_to_id%5D=%21*&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
@@ -123,7 +137,7 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 | [Not Assigned: Public Cloud]( https://progress.opensuse.org/projects/public_cloud/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=2&f%5B%5D=assigned_to_id&op%5Bassigned_to_id%5D=%21*&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
 
 
-**Assigned but not started**
+**Assigned but not started <a name='assigned_but_not_started'></a>**
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [Assigned but not started: Containers]( https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=1&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=assigned_to_id&op%5Bassigned_to_id%5D=*&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
@@ -133,7 +147,7 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 | [Assigned but not started: Public Cloud]( https://progress.opensuse.org/projects/public_cloud/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=1&v%5Bstatus_id%5D%5B%5D=12&f%5B%5D=assigned_to_id&op%5Bassigned_to_id%5D=*&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
 
 
-**New tickets**
+**New tickets <a name='new_tickets'></a>**
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [New: Containers]( https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=1&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 1 | 0 | &#x1F534;
@@ -143,7 +157,7 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 | [New: Public Cloud]( https://progress.opensuse.org/projects/public_cloud/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=status_id&op%5Bstatus_id%5D=%3D&v%5Bstatus_id%5D%5B%5D=1&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=4&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 3 | 0 | &#x1F534;
 
 
-**Coordination without subtasks**
+**Coordination without subtasks <a name='coordination_without_subtasks'></a>**
 Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 --- | --- | --- | ---
 | [Coordination with no subtasks: Containers]( https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=updated_on%2Cpriority%3Adesc%2Cid%3Adesc&f%5B%5D=tracker_id&op%5Btracker_id%5D=%3D&v%5Btracker_id%5D%5B%5D=6&f%5B%5D=child_id&op%5Bchild_id%5D=%21*&f%5B%5D=status_id&op%5Bstatus_id%5D=%21&v%5Bstatus_id%5D%5B%5D=1&v%5Bstatus_id%5D%5B%5D=3&v%5Bstatus_id%5D%5B%5D=5&v%5Bstatus_id%5D%5B%5D=6&f%5B%5D=&c%5B%5D=subject&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=created_on&c%5B%5D=relations&c%5B%5D=updated_on&c%5B%5D=project&group_by=status&t%5B%5D=) | 0 | 0 | &#x1F49A;
@@ -154,8 +168,8 @@ Backlog Query | Number of Issues | Ideal Number (min/max) | Status
 
 
 
-# Epics
-**Container Epics**
+# Epics <a name='epics'></a>
+**Container Epics <a name='container_epics'></a>**
 Epic | Status | Start Date | Done Ratio
 --- | --- | --- | ---
 | [ New tests for SLE 15-SP4 / Leap 15.4](https://progress.opensuse.org/issues/105906) | Workable | 2022-02-03 | 30%
@@ -166,14 +180,14 @@ Epic | Status | Start Date | Done Ratio
 | [{brainstorming}](https://progress.opensuse.org/issues/87853) | New | 2020-11-05 | 33%
 
 
-**JeOS Epics**
+**JeOS Epics <a name='jeos_epics'></a>**
 Epic | Status | Start Date | Done Ratio
 --- | --- | --- | ---
 | [ Image oriented testing](https://progress.opensuse.org/issues/95428) | Workable | 2020-05-19 | 0%
 | [ {svirt} separate hyperv from svirt backend](https://progress.opensuse.org/issues/95422) | New | 2021-07-13 | 0%
 
 
-**SLE Micro Epics**
+**SLE Micro Epics <a name='sle_micro_epics'></a>**
 Epic | Status | Start Date | Done Ratio
 --- | --- | --- | ---
 | [ Extend virtualization tests for MicroOS / SLE Micro ](https://progress.opensuse.org/issues/105133) | Workable | 2021-12-22 | 0%
@@ -182,13 +196,13 @@ Epic | Status | Start Date | Done Ratio
 | [ Basic Cockpit UI testing on SLE Micro](https://progress.opensuse.org/issues/88393) | Workable | 2021-06-03 | 100%
 
 
-**WSL Epics**
+**WSL Epics <a name='wsl_epics'></a>**
 Epic | Status | Start Date | Done Ratio
 --- | --- | --- | ---
 | [ Backend improvement to create tests for WSL2](https://progress.opensuse.org/issues/105139) | New | 2019-11-27 | 33%
 
 
-**Public Cloud Epics**
+**Public Cloud Epics <a name='public_cloud_epics'></a>**
 Epic | Status | Start Date | Done Ratio
 --- | --- | --- | ---
 | [ Incidents job groups should be created for all ve...](https://progress.opensuse.org/issues/103686) | Workable | 2021-12-08 | 75%
@@ -197,8 +211,8 @@ Epic | Status | Start Date | Done Ratio
 
 
 
-# Incoming vs outcoming tasks
-**Incoming vs outcoming during the last 30 days**
+# Incoming vs outcoming tasks <a name='incoming_vs_outcoming_tasks'></a>
+**Incoming vs outcoming during the last 30 days <a name='incoming_vs_outcoming_during_the_last_30_days'></a>**
 Backlog Query | New tickets | Finished tickets | Backlog length | Status
 --- | --- | --- | --- | ---
 | Containers | 11 | 4 | 32 | &#x1F534;
@@ -208,7 +222,7 @@ Backlog Query | New tickets | Finished tickets | Backlog length | Status
 | SLE Micro | 8 | 3 | 11 | &#x1F534;
 
 
-**Incoming vs outcoming during the last 4 months**
+**Incoming vs outcoming during the last 4 months <a name='incoming_vs_outcoming_during_the_last_4_months'></a>**
 Backlog Query | New tickets | Finished tickets | Backlog length | Status
 --- | --- | --- | --- | ---
 | Containers | 56 | 69 | 32 | &#x1F49A;
