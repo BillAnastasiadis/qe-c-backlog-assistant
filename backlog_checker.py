@@ -27,22 +27,25 @@ def initialize_md():
         md.write("**Latest Run:** " + datetime.now().strftime("%Y-%m-%d %H:%M:%S") + " GMT\n")
         md.write("*(Please refresh to see latest results)*\n\n")
 
+def anchor(text):
+    name = text.replace("(", "").replace(")", "").replace(" ", "_").lower()
+    return f"<a name='{name}'></a>"
 
 # Append individual results to md file
 def results_to_md(a, b, c, d):
     with open("index.md", "a") as md:
         md.write("| " + a + " | " + b + " | " + c + " | " + d + "\n")
 
-
 def category_to_md(category):
+    link = anchor(category)
     with open("index.md", "a") as md:
-        md.write(f"\n# {category}\n")
+        md.write(f"\n# {category} {link}\n")
 
 
 def header_to_md(header):
+    link = anchor(header)
     with open("index.md", "a") as md:
-        md.write(f"**{header}**\n")
-
+        md.write(f"**{header} {link}**\n")
 
 def table_header_to_md():
     with open("index.md", "a") as md:
@@ -289,6 +292,9 @@ def gha_epics():
             results_to_md(f"[{subject}]({epic_issue})", issue['status']['name'], start, done)
         table_end_to_md()
 
+def gha_description():
+    text = os.environ['text']
+    toMD(text)
 
 if "init" in sys.argv:
     initialize_md()
@@ -300,5 +306,7 @@ elif "comp2" in sys.argv:
     gha_comp_2()
 elif "inverted" in sys.argv:
     gha_check_inverted()
+elif "description" in sys.argv:
+    gha_description()
 else:
     gha_check()
