@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 from inspect import getmembers, isfunction
 import requests
 
-
 # Icons used for PASS or FAIL in the md file
 result_icons = {"pass": "&#x1F49A;", "fail": "&#x1F534;"}
 # Links for various backlog queries to be used in the md file
@@ -15,8 +14,8 @@ def initialize_queries():
     with open("queries.txt", "r") as qr:
         for q in qr.readlines():
             k, v = q.split("|", 1)
-            print(k)
-            print(v)
+            # print(k)
+            # print(v)
             query_links[k] = v.strip("\n")
 
 
@@ -31,51 +30,16 @@ def anchor(text):
     name = text.replace("(", "").replace(")", "").replace(" ", "_").lower()
     return f"<a name='{name}'></a>"
 
-# Append individual results to md file
-def results_to_md(a, b, c, d):
-    with open("index.md", "a") as md:
-        md.write("| " + a + " | " + b + " | " + c + " | " + d + "\n")
+def link(text, url):
+    return f"[ {text} ]({url})"
 
 def category_to_md(category):
     link = anchor(category)
-    with open("index.md", "a") as md:
-        md.write(f"\n# {category} {link}\n")
-
+    toMD(f"\n# {category} {link}\n")
 
 def header_to_md(header):
     link = anchor(header)
-    with open("index.md", "a") as md:
-        md.write(f"**{header} {link}**\n")
-
-def table_header_to_md():
-    with open("index.md", "a") as md:
-        md.write(
-            "Backlog Query | Number of Issues | Ideal Number (min/max) | Status\n--- | --- | --- | ---\n")
-
-def table_end_to_md():
-    with open("index.md", "a") as md:
-        md.write("\n\n")
-
-def epic_header_to_md():
-    with open("index.md", "a") as md:
-        md.write(
-            "Epic | Status | Start Date | Done Ratio\n--- | --- | --- | ---\n")
-
-def table_comp_header_to_md(a, b, c):
-    with open("index.md", "a") as md:
-        md.write(
-            "Backlog Query | " + a + " | " + b + " | " + c + " | Status\n--- | --- | --- | --- | ---\n")
-
-def table_comp_results_to_md(a, b, c, d, e):
-    with open("index.md", "a") as md:
-        md.write("| " + a + " | " + b + " | " + c + " | " + d + " | " + e + "\n")
-
-def table_comp_results_to_md_withoutStatusColumn(a, b, c, d):
-    with open("index.md", "a") as md:
-        md.write("| " + a + " | " + b + " | " + c + " | " + d + "\n")
-
-def link(text, url):
-    return "[ " + text + " ](" + url + ")"
+    toMD(f"**{header} {link}**\n\n")
 
 def byDefaultEnv(name, defaultValue):
     if name in os.environ:
@@ -98,20 +62,31 @@ def table_header_to_md_adv(columns):
 def table_results_to_md_adv(values):
     toMD(" | " + " | ".join(values) + "\n")
 
-
-def query_count(query):
+def query_base(query):
     key = os.environ['key']
     answer = requests.get(
         f"{query_links[query].replace('issues', 'issues.json')}"
         + f"&key={key}")
-    root = json.loads(answer.content)
+    return json.loads(answer.content)
+
+def query_count(query):
+    root = query_base(query)
     return int(root["total_count"])
 
 def print_default_headers():
     if "category" in os.environ:
         category_to_md(os.environ["category"])
+        if "category_description" in os.environ:
+            toMD(os.environ["category_description"] + '\n')
+
     if "header" in os.environ:
         header_to_md(os.environ["header"])
+        if "header_description" in os.environ:
+            toMD(os.environ["header_description"] + '\n')
+
+def print_footer():
+    if "footer" in os.environ:
+        toMD(os.environ["footer"] + '\n')
 
 def open_table(columns):
     if "tb_start" in sys.argv:
@@ -121,93 +96,138 @@ def close_table():
     if "tb_end" in sys.argv:
         table_end_to_md()
 
-# Customizable check function
+def calc_icon(value1, value2, gt_icon, lt_icon):
+    inverted = byDefaultEnv("inverted", False)
+    if inverted is True:
+        tmp = lt_icon
+        lt_icon = gt_icon
+        gt_icon = tmp
+
+    if value1 > value2:
+        icon = result_icons[gt_icon]
+    else:
+        icon = result_icons[lt_icon]
+
+# Customizable table
+def gha_table(columns):
+    print_default_headers()
+
+    headers = []
+    rows = []
+    for col in columns:
+        headers.append(str(col["header"]))
+        if "link" in col:
+            rows.append(link(str(col["text"]), col["link"]))
+        else:
+            rows.append(str(col["text"]))
+
+    open_table(headers)
+    table_results_to_md_adv(rows)
+    close_table()
+    print_footer()
+
+# DEPRECATED Append individual results to md file
+def results_to_md(a, b, c, d):
+    with open("index.md", "a") as md:
+        md.write("| " + a + " | " + b + " | " + c + " | " + d + "\n")
+
+# DEPRECATED
+def table_header_to_md():
+    with open("index.md", "a") as md:
+        md.write(
+            "Backlog Query | Number of Issues | Ideal Number (min/max) | Status\n--- | --- | --- | ---\n")
+
+def table_end_to_md():
+    toMD("\n\n")
+
+# DEPRECATED
+def epic_header_to_md():
+    with open("index.md", "a") as md:
+        md.write(
+            "Epic | Status | Start Date | Done Ratio\n--- | --- | --- | ---\n")
+
+# DEPRECATED
+def table_comp_header_to_md(a, b, c):
+    with open("index.md", "a") as md:
+        md.write(
+            "Backlog Query | " + a + " | " + b + " | " + c + " | Status\n--- | --- | --- | --- | ---\n")
+
+# DEPRECATED
+def table_comp_results_to_md(a, b, c, d, e):
+    with open("index.md", "a") as md:
+        md.write("| " + a + " | " + b + " | " + c + " | " + d + " | " + e + "\n")
+
+# DEPRECATED
+def table_comp_results_to_md_withoutStatusColumn(a, b, c, d):
+    with open("index.md", "a") as md:
+        md.write("| " + a + " | " + b + " | " + c + " | " + d + "\n")
+
 def gha_check():
     initialize_queries()
-    key = os.environ['key']
+    
     query = os.environ['query']
     max_level = int(os.getenv('max_level', default = 0))
-    if "category" in os.environ:
-        category_to_md(os.environ["category"])
-    if "header" in os.environ:
-        header_to_md(os.environ["header"])
-    if "tb_start" in sys.argv:
-        table_header_to_md()
-    answer = requests.get(
-        f"{query_links[query].replace('issues', 'issues.json')}"
-        + f"&key={key}")
-    root = json.loads(answer.content)
-    issue_count = int(root["total_count"])
-    if issue_count > max_level:
-        print(f"Backlog has {query} tickets!")
-        print(f"Please check {query_links[query]}")
-        results_to_md(
-            f"[{query}]({query_links[query]})",
-                      str(issue_count), str(max_level), result_icons["fail"])
-        if "tb_end" in sys.argv:
-            table_end_to_md()
-        exit(1)
-    print(f"{query} length is {issue_count}, all good!")
-    results_to_md(f"[{query}]({query_links[query]})",
-                  str(issue_count), str(max_level), result_icons["pass"])
-    if "tb_end" in sys.argv:
-        table_end_to_md()
+
+    issue_count = query_count(query)
+    icon = calc_icon(issue_count, max_level, "fail", "pass")
+
+    gha_table([
+        {
+            "header": "Backlog Query",            
+            "text": query,
+            "link": query_links[query]
+        },
+        {
+            "header": "Number of issues",            
+            "text": str(issue_count)
+        },
+        {
+            "header": "Warning level",
+            "text": str(max_level)
+        },
+        {
+            "header": "Status",
+            "text": icon
+        }
+    ])
 
 def gha_comp():
     initialize_queries()
-    key = os.environ['key']
-    rowText = os.environ["rowText"]
 
-    if "category" in os.environ:
-        category_to_md(os.environ["category"])
-    if "header" in os.environ:
-        header_to_md(os.environ["header"])
-    if "tb_start" in sys.argv:
-        table_comp_header_to_md(os.environ['head1'], os.environ['head2'], os.environ['head3'])
+    issue_count_1 = query_count(os.environ['query1'])
+    issue_count_2 = query_count(os.environ['query2'])
+    issue_count_3 = query_count(os.environ['query3'])
 
-    query1 = os.environ['query1']
-    answer1 = requests.get(
-        f"{query_links[query1].replace('issues', 'issues.json')}"
-        + f"&key={key}")
-    root1 = json.loads(answer1.content)
-    issue_count_1 = int(root1["total_count"])
+    icon = calc_icon(issue_count_1, issue_count_2, "fail", "pass")
 
-    query2 = os.environ['query2']    
-    answer2 = requests.get(
-        f"{query_links[query2].replace('issues', 'issues.json')}"
-        + f"&key={key}")
-    root2 = json.loads(answer2.content)
-    issue_count_2 = int(root2["total_count"])
-
-    query3 = os.environ['query3']    
-    answer3 = requests.get(
-        f"{query_links[query3].replace('issues', 'issues.json')}"
-        + f"&key={key}")
-    root3 = json.loads(answer3.content)
-    issue_count_3 = int(root3["total_count"])
-
-    print(f"{rowText} where {issue_count_1} <= {issue_count_2}")
-
-    res1 = str(issue_count_1)
-    res2 = str(issue_count_2)
-    
-    if issue_count_1 > issue_count_2:
-        table_comp_results_to_md(rowText, res1, res2, str(issue_count_3), result_icons["fail"])
-        if "tb_end" in sys.argv:
-            table_end_to_md()
-        exit(1)
-
-    print(f"{rowText} where {issue_count_1} <= {issue_count_2}, all good!")
-    table_comp_results_to_md(rowText, res1, res2, str(issue_count_3), result_icons["pass"])
-
-    if "tb_end" in sys.argv:
-        table_end_to_md()
+    gha_table([
+        {
+            "header": "Backlog Query",
+            "text": os.environ["rowText"]
+        },
+        {
+            "header": os.environ['head1'],
+            "text": str(issue_count_1)
+        },
+        {
+            "header": os.environ['head2'],
+            "text": str(issue_count_2)
+        },
+        {
+            "header": os.environ['head3'],
+            "text": str(issue_count_3)
+        },
+        {
+            "header": "Status",
+            "text": icon
+        }
+    ])
 
 def gha_comp_2():
     initialize_queries()
-    rowText = os.environ["rowText"]
+
     firstColumnTitle = byDefaultEnv("firstColumnTitle", "Project")
-    # showStatusColumn = byDefaultEnv("showStatusColumn", True)
+
     query1 = os.environ['query1']
     query2 = os.environ['query2']
     query3 = os.environ['query3']
@@ -220,77 +240,61 @@ def gha_comp_2():
     res2 = link(str(issue_count_2) + " (" + str(round(100*issue_count_2/issue_count_3)) + "%)", query_links[query2])
     res3 = link(str(issue_count_3), query_links[query3])
 
-    print_default_headers()
-    open_table([firstColumnTitle, os.environ['head1'], os.environ['head2'], os.environ['head3']])
-    table_results_to_md_adv([rowText, res1, res2, res3])
-    close_table()
-
-def gha_check_inverted():
-    initialize_queries()
-    key = os.environ['key']
-    query = os.environ['query']
-    min_level = int(os.getenv('min_level', default = 1))
-    if "category" in os.environ:
-        category_to_md(os.environ["category"])
-    if "header" in os.environ:
-        header_to_md(os.environ["header"])
-    if "tb_start" in sys.argv:
-        table_header_to_md()
-    answer = requests.get(
-        f"{query_links[query].replace('issues', 'issues.json')}"
-        + f"&key={key}")
-    root = json.loads(answer.content)
-    issue_count = int(root["total_count"])
-    if issue_count < min_level:
-        print(f"Backlog has {query} tickets!")
-        print(f"Please check {query_links[query]}")
-        results_to_md(
-            f"[{query}]({query_links[query]})",
-                      str(issue_count), str(min_level), result_icons["fail"])
-        if "tb_end" in sys.argv:
-            table_end_to_md()
-        exit(1)
-    print(f"{query} length is {issue_count}, all good!")
-    results_to_md(f"[{query}]({query_links[query]})",
-                  str(issue_count), str(min_level), result_icons["pass"])
-    if "tb_end" in sys.argv:
-        table_end_to_md()
-
+    gha_table([
+        {
+            "header": firstColumnTitle,
+            "text": os.environ["rowText"]
+        },
+        {
+            "header": os.environ['head1'],
+            "text": res1
+        },
+        {
+            "header": os.environ['head2'],
+            "text": res2
+        },
+        {
+            "header": os.environ['head3'],
+            "text": res3
+        }
+    ])
 
 # Customizable check function
 def gha_epics():
     initialize_queries()
-    key = os.environ['key']
     query = os.environ['query']
-    if "category" in os.environ:
-        category_to_md(os.environ["category"])
-    header_to_md(os.environ["header"])
-    answer = requests.get(
-        f"{query_links[query].replace('issues', 'issues.json')}"
-        + f"&key={key}")
-    root = json.loads(answer.content)
+
+    print_default_headers()
+
+    root = query_base(query)
     issue_count = int(root["total_count"])
+
     if issue_count <= 0:
-        with open("index.md", "a") as md:
-            md.write("\n\nNo active epics for this project\n\n")
+        toMD("\n\nNo active epics for this project\n\n")
     else:
-        epic_header_to_md()
+        table_header_to_md_adv(["Epic", "Status", "Start Date", "Progress"])
+
         for issue in root['issues']:
             epic_issue = "https://progress.opensuse.org/issues/" + str(issue['id'])
             subject = issue['subject']
             subject = subject.replace("[epic]", "").replace("[", "{").replace("]",
                                                                               "}").replace(
                 "(", "{").replace(")", "}")
+
             if len(subject) > 53:
                 subject = subject[:50] + "..."
-            print(issue['status']['name'])
+
             start = issue['start_date'] if 'start_date' in issue else "-"
+
             if "done_ratio" in issue:
                 done = str(issue['done_ratio']) + "%"
             else:
                 done = "-"
-            results_to_md(f"[{subject}]({epic_issue})", issue['status']['name'], start, done)
+
+            table_results_to_md_adv([f"[{subject}]({epic_issue})", issue['status']['name'], start, done])
+
         table_end_to_md()
+        print_footer()
 
 def gha_description():
     text = os.environ['text']
@@ -304,8 +308,6 @@ elif "comp" in sys.argv:
     gha_comp()
 elif "comp2" in sys.argv:
     gha_comp_2()
-elif "inverted" in sys.argv:
-    gha_check_inverted()
 elif "description" in sys.argv:
     gha_description()
 else:

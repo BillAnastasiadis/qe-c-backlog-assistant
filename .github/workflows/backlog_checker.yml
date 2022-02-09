@@ -34,12 +34,18 @@ jobs:
           python backlog_checker.py description
         env:
           text: |
-            This is the dashboard for Quality Engineering for Containers and Public Cloud. 
+            This is the dashboard for Quality Engineering for Containers and Public Cloud.
+
             We are currently working on four projects: Containers, JeOS, WSL, Public Cloud and SLE Micro
             * [General team overview](#general_team_overview)
+              * [Bugs vs Features Backlog Length](#bugs_vs_features_backlog_length)
+              * [Incoming vs outcoming during the last 30 days](#incoming_vs_outcoming_during_the_last_30_days)
+              * [Incoming vs outcoming during the last 4 months](#incoming_vs_outcoming_during_the_last_4_months)
             * [Backlog Lengths by priority](#backlog_lengths_by_priority)
             * [Pickup time alerts](#pickup_time_alerts)
-            * [No Changes in 15 Days](#no_changes_in_15_days)
+            * [Non updated tickets for 15 days](#non_updated_tickets_for_15_days)
+              * [Tickets in progress with no changes in 15 days](#tickets_in_progress_with_no_changes_in_15_days)
+              * [Tickets with the status Blocked and Feedback with no changes in 15 days](#tickets_with_the_status_blocked_and_feedback_with_no_changes_in_15_days)
             * [No Changes in 15 Days (Blocked and Feedback)](#no_changes_in_15_days_blocked_and_feedback)
             * [Abnormalities](#abnormalities)
               * [In Progress But Not Assigned](#in_progress_but_not_assigned)
@@ -47,16 +53,20 @@ jobs:
               * [New tickets](#new_tickets)
               * [Coordination without subtasks](#coordination_without_subtasks)
             * [Epics](#epics)
-            * [Incoming vs outcoming tasks](#incoming_vs_outcoming_tasks)
 
+      ######################################################################
+      # General team overview
+      ######################################################################
       # Bugs vs Features Backlog Length
       - name: Bugs vs Features Backlog Length Containers
         if: always()
         run: |
           python backlog_checker.py comp2 tb_start
         env:
-          header: "Bugs vs Features Backlog Length"
           category: "General team overview"
+          header: "Bugs vs Features Backlog Length"
+          header_description: |
+            This table compares the number of bugs against the planned tickets.          
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "Containers"
           query1: "Backlog Bugs Length: Containers"
@@ -118,6 +128,152 @@ jobs:
           head2: "Features"
           head3: "Total"
 
+    # Incoming vs outcoming during the last 30 days
+      - name: Input vs Output ratios in 30 days Containers
+        if: always()
+        run: |
+          python backlog_checker.py comp tb_start
+        env:
+          header: "Incoming vs outcoming during the last 30 days"
+          header_description: |
+            This table shows the balance between ticket creation and ticket resolution. 
+            If more tickets arrive than we are capable of solving, 
+            it means that the length of the backlog will grow, and therefore we need more work force in that project. 
+            And more tickets come out than come in, so we can divert workforce to other projects if necessary.
+            Two time ranges are contemplated, short-term (30 days) and medium-term (4 months)
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "Containers"
+          query1: "Created In The Last 30 Days: Containers"
+          query2: "Finished In The Last 30 Days: Containers"
+          query3: "Backlog Length: Containers"
+          head1: "New tickets"
+          head2: "Finished tickets"
+          head3: "Backlog length"
+      - name: Input vs Output ratios in 30 days JeOS
+        if: always()
+        run: |
+          python backlog_checker.py comp 
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "JeOS"
+          query1: "Created In The Last 30 Days: JeOS"
+          query2: "Finished In The Last 30 Days: JeOS"
+          query3: "Backlog Length: JeOS"
+          head1: "New tickets"
+          head2: "Finished tickets"
+          head3: "Backlog length"
+      - name: Input vs Output ratios in 30 days WSL
+        if: always()
+        run: |
+          python backlog_checker.py comp 
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "WSL"
+          query1: "Created In The Last 30 Days: WSL"
+          query2: "Finished In The Last 30 Days: WSL"
+          query3: "Backlog Length: WSL"
+          head1: "New tickets"
+          head2: "Finished tickets"
+          head3: "Backlog length"
+      - name: Input vs Output ratios in 30 days Public Cloud
+        if: always()
+        run: |
+          python backlog_checker.py comp 
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "Public Cloud"
+          query1: "Created In The Last 30 Days: Public Cloud"
+          query2: "Finished In The Last 30 Days: Public Cloud"
+          query3: "Backlog Length: Public Cloud"
+          head1: "New tickets"
+          head2: "Finished tickets"
+          head3: "Backlog length"
+      - name: Input vs Output ratios in 30 days SLE Micro
+        if: always()
+        run: |
+          python backlog_checker.py comp tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "SLE Micro"
+          query1: "Created In The Last 30 Days: SLE Micro"
+          query2: "Finished In The Last 30 Days: SLE Micro"
+          query3: "Backlog Length: SLE Micro"
+          head1: "New tickets"
+          head2: "Finished tickets"
+          head3: "Backlog length"
+
+      # Incoming vs outcoming during the last 4 months
+      - name: Input vs Output ratios in 4 months Containers
+        if: always()
+        run: |
+          python backlog_checker.py comp tb_start
+        env:
+          header: "Incoming vs outcoming during the last 4 months"
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "Containers"
+          query1: "Created In The Last 120 Days: Containers"
+          query2: "Finished In The Last 120 Days: Containers"
+          query3: "Backlog Length: Containers"
+          head1: "New tickets"
+          head2: "Finished tickets"
+          head3: "Backlog length"
+      - name: Input vs Output ratios in 4 months JeOS
+        if: always()
+        run: |
+          python backlog_checker.py comp 
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "JeOS"
+          query1: "Created In The Last 120 Days: JeOS"
+          query2: "Finished In The Last 120 Days: JeOS"
+          query3: "Backlog Length: JeOS"
+          head1: "New tickets"
+          head2: "Finished tickets"
+          head3: "Backlog length"
+      - name: Input vs Output ratios in 4 months WSL
+        if: always()
+        run: |
+          python backlog_checker.py comp 
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "WSL"
+          query1: "Created In The Last 120 Days: WSL"
+          query2: "Finished In The Last 120 Days: WSL"
+          query3: "Backlog Length: WSL"
+          head1: "New tickets"
+          head2: "Finished tickets"
+          head3: "Backlog length"
+      - name: Input vs Output ratios in 4 months Public Cloud
+        if: always()
+        run: |
+          python backlog_checker.py comp 
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "Public Cloud"
+          query1: "Created In The Last 120 Days: Public Cloud"
+          query2: "Finished In The Last 120 Days: Public Cloud"
+          query3: "Backlog Length: Public Cloud"
+          head1: "New tickets"
+          head2: "Finished tickets"
+          head3: "Backlog length"
+      - name: Input vs Output ratios in 4 months SLE Micro
+        if: always()
+        run: |
+          python backlog_checker.py comp tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          rowText: "SLE Micro"
+          query1: "Created In The Last 120 Days: SLE Micro"
+          query2: "Finished In The Last 120 Days: SLE Micro"
+          query3: "Backlog Length: SLE Micro"
+          head1: "New tickets"
+          head2: "Finished tickets"
+          head3: "Backlog length"
+
+      ######################################################################
+      # Backlog lengths
+      ######################################################################
+
       # Backlog lengths : Containers
       - name: check urgent priority containers backlog length
         if: always()
@@ -128,6 +284,8 @@ jobs:
           query: "Urgent Priority Length: Containers"
           header: "Containers"
           category: "Backlog Lengths by priority"
+          category_description: |
+            These tables show the backlog length per priority. The "Warning level" is a the max number of tickets that we consider safe. This level is established by consensus in the team.
           max_level: 1
       - name: check high priority containers backlog length
         if: always()
@@ -254,6 +412,10 @@ jobs:
           query: "Normal Priority Length: Public Cloud"
           max_level: 20
 
+      ######################################################################
+      # Pickup timeouts
+      ######################################################################
+
       # Urgent prioities timeout
       - name: check urgent priority containers backlog timeout
         if: always()
@@ -263,6 +425,8 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Urgent Priority: Containers"
           category: "Pickup time alerts"
+          category_description: |
+            These tables show the tickets that are in violation of the [SLO](https://progress.opensuse.org/projects/openqatests/wiki#SLOs-service-level-objectives)
           header: "Urgent Priority"
       - name: check urgent priority jeos backlog timeout
         if: always()
@@ -369,6 +533,10 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Normal Priority: Public Cloud"
 
+      ######################################################################
+      # No changes in 15 days
+      ######################################################################
+
       # No Changes in 15 days
       - name: check not changed in 15 days containers backlog length
         if: always()
@@ -377,7 +545,12 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: Containers"
-          category: "No Changes in 15 Days"
+          category: "Non updated tickets for 15 days"
+          category_description: |
+            These tables show the tickets that have more than 15 days without any update
+          header: "Tickets in progress with no changes in 15 days"
+          header_description: |
+            These tickets are in progress and we should review that because maybe have blockers or are under feedback and we forgot to update the status of the ticket.
       - name: check not changed in 15 days jeos backlog length
         if: always()
         run: |
@@ -415,7 +588,9 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: Containers (Blocked and Feedback)"
-          category: "No Changes in 15 Days (Blocked and Feedback)"
+          header: "Tickets with the status Blocked and Feedback with no changes in 15 days"
+          header_description: |
+            These tickets are in progress and we should review that because maybe what is blocking is solved. Or we need to insist when we don't have feedback.
       - name: check not changed in 15 days jeos backlog length (Blocked and Feedback)
         if: always()
         run: |
@@ -445,9 +620,9 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: Public Cloud (Blocked and Feedback)"
 
-      #
+      ######################################################################
       # Abnormalities
-      #
+      ######################################################################
       # In progress but not Assigned
       - name: check in progress not assigned containers backlog length
         if: always()
@@ -457,7 +632,12 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Assigned: Containers"
           category: "Abnormalities"
+          category_description: |
+            These tickets has some kind of abnormality, and should be alerted to the team and reviewed
           header: "In Progress But Not Assigned"
+          header_description: |
+            These are the typical tickets that due to forgetfulness are in progress but there is no assigned person. 
+            If there is any clarification to be made with the person who is working with it, we need to know his name
       - name: check in progress not assigned jeos backlog length
         if: always()
         run: |
@@ -496,6 +676,10 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Assigned but not started: Containers"
           header: "Assigned but not started"
+          header_description: |
+            Some tickets could be blocked by a teammate for a time assigned to him but not started. This option is considered, 
+            but care must be taken if too much time has passed or if the person is on sick leave or on vacation. 
+            This would mean that the task is effectively blocked
       - name: check in progress assigned but not started jeos backlog length
         if: always()
         run: |
@@ -534,6 +718,8 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "New: Containers"
           header: "New tickets"
+          header_description: |
+            New tickets that are not workable and need clarification should be reviewed during the refinement meeting.
       - name: check new jeos backlog length
         if: always()
         run: |
@@ -572,6 +758,9 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Coordination with no subtasks: Containers"
           header: "Coordination without subtasks"
+          header_description: |
+            Epics can be defined to record a new line of work in a project. 
+            Initially these epics may not have tasks assigned to them. This table is a reminder for the PO
       - name: check in progress coordination without subtasks jeos backlog length
         if: always()
         run: |
@@ -643,151 +832,6 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Epics Public Cloud"
           header: "Public Cloud Epics"
-
-      # Incoming vs outcoming during the last 30 days
-      - name: Input vs Output ratios in 30 days Containers
-        if: always()
-        run: |
-          python backlog_checker.py comp tb_start
-        env:
-          category: "Incoming vs outcoming tasks"
-          header: "Incoming vs outcoming during the last 30 days"
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "Containers"
-          query1: "Created In The Last 30 Days: Containers"
-          query2: "Finished In The Last 30 Days: Containers"
-          query3: "Backlog Length: Containers"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-
-      - name: Input vs Output ratios in 30 days JeOS
-        if: always()
-        run: |
-          python backlog_checker.py comp 
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "JeOS"
-          query1: "Created In The Last 30 Days: JeOS"
-          query2: "Finished In The Last 30 Days: JeOS"
-          query3: "Backlog Length: JeOS"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-
-      - name: Input vs Output ratios in 30 days WSL
-        if: always()
-        run: |
-          python backlog_checker.py comp 
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "WSL"
-          query1: "Created In The Last 30 Days: WSL"
-          query2: "Finished In The Last 30 Days: WSL"
-          query3: "Backlog Length: WSL"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-
-      - name: Input vs Output ratios in 30 days Public Cloud
-        if: always()
-        run: |
-          python backlog_checker.py comp 
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "Public Cloud"
-          query1: "Created In The Last 30 Days: Public Cloud"
-          query2: "Finished In The Last 30 Days: Public Cloud"
-          query3: "Backlog Length: Public Cloud"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-
-      - name: Input vs Output ratios in 30 days SLE Micro
-        if: always()
-        run: |
-          python backlog_checker.py comp tb_end
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "SLE Micro"
-          query1: "Created In The Last 30 Days: SLE Micro"
-          query2: "Finished In The Last 30 Days: SLE Micro"
-          query3: "Backlog Length: SLE Micro"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-
-      # Incoming vs outcoming during the last 4 months
-      - name: Input vs Output ratios in 4 months Containers
-        if: always()
-        run: |
-          python backlog_checker.py comp tb_start
-        env:
-          header: "Incoming vs outcoming during the last 4 months"
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "Containers"
-          query1: "Created In The Last 120 Days: Containers"
-          query2: "Finished In The Last 120 Days: Containers"
-          query3: "Backlog Length: Containers"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-
-      - name: Input vs Output ratios in 120 days JeOS
-        if: always()
-        run: |
-          python backlog_checker.py comp 
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "JeOS"
-          query1: "Created In The Last 120 Days: JeOS"
-          query2: "Finished In The Last 120 Days: JeOS"
-          query3: "Backlog Length: JeOS"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-
-      - name: Input vs Output ratios in 120 days WSL
-        if: always()
-        run: |
-          python backlog_checker.py comp 
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "WSL"
-          query1: "Created In The Last 120 Days: WSL"
-          query2: "Finished In The Last 120 Days: WSL"
-          query3: "Backlog Length: WSL"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-
-      - name: Input vs Output ratios in 120 days Public Cloud
-        if: always()
-        run: |
-          python backlog_checker.py comp 
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "Public Cloud"
-          query1: "Created In The Last 120 Days: Public Cloud"
-          query2: "Finished In The Last 120 Days: Public Cloud"
-          query3: "Backlog Length: Public Cloud"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-
-      - name: Input vs Output ratios in 120 days SLE Micro
-        if: always()
-        run: |
-          python backlog_checker.py comp tb_end
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "SLE Micro"
-          query1: "Created In The Last 120 Days: SLE Micro"
-          query2: "Finished In The Last 120 Days: SLE Micro"
-          query3: "Backlog Length: SLE Micro"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
 
       # Commit
       - name: Commit files
