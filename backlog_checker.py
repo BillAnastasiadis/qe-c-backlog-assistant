@@ -108,6 +108,8 @@ def calc_icon(value1, value2, gt_icon, lt_icon):
     else:
         icon = result_icons[lt_icon]
 
+    return icon
+
 # Customizable table
 def gha_table(columns):
     print_default_headers()
