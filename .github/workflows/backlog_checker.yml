@@ -202,6 +202,7 @@ jobs:
           head2: "Finished tickets"
           head3: "Backlog length"
 
+
       # Incoming vs outcoming during the last 4 months
       - name: Input vs Output ratios in 4 months Containers
         if: always()
@@ -756,6 +757,8 @@ jobs:
           header_description: |
             New tickets that are not workable and need clarification should be reviewed during the refinement meeting.
           hideMaxLevel: "1"
+          failIcon: "review"
+          passIcon: ""
       - name: check new jeos backlog length
         if: always()
         run: |
@@ -764,6 +767,8 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "New: JeOS"
           hideMaxLevel: "1"
+          failIcon: "review"
+          passIcon: ""
       - name: check new SLE Micro backlog length
         if: always()
         run: |
@@ -772,6 +777,8 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "New: SLE Micro"
           hideMaxLevel: "1"
+          failIcon: "review"
+          passIcon: ""
       - name: check new wsl backlog length
         if: always()
         run: |
@@ -780,6 +787,8 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "New: WSL"
           hideMaxLevel: "1"
+          failIcon: "review"
+          passIcon: ""
       - name: check new public cloud backlog length
         if: always()
         run: |
@@ -788,6 +797,8 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "New: Public Cloud"
           hideMaxLevel: "1"
+          failIcon: "review"
+          passIcon: ""
 
       # Coordination without subtasks
       - name: check in progress coordination without subtasks containers backlog length
