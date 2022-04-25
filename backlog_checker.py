@@ -6,7 +6,7 @@ from inspect import getmembers, isfunction
 import requests
 
 # Icons used for PASS or FAIL in the md file
-result_icons = {"pass": "&#x1F49A;", "fail": "&#x1F534;"}
+result_icons = {"pass": "&#x1F49A;", "fail": "&#x1F534;", "review": "&#x1f448;"}
 # Links for various backlog queries to be used in the md file
 query_links = {}
 
@@ -104,9 +104,15 @@ def calc_icon(value1, value2, gt_icon, lt_icon):
         gt_icon = tmp
 
     if value1 > value2:
-        icon = result_icons[gt_icon]
+        if gt_icon == "":
+            icon = ""
+        else:
+            icon = result_icons[gt_icon]
     else:
-        icon = result_icons[lt_icon]
+        if lt_icon == "":
+            icon = ""
+        else:
+            icon = result_icons[lt_icon]
 
     return icon
 
@@ -174,7 +180,7 @@ def gha_check():
     max_level = int(os.getenv('max_level', default = 0))
 
     issue_count = query_count(query)
-    icon = calc_icon(issue_count, max_level, "fail", "pass")
+    icon = calc_icon(issue_count, max_level, byDefaultEnv("failIcon", "fail"), byDefaultEnv("passIcon", "pass"))
 
     gha_table([
         {
