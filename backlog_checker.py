@@ -117,6 +117,9 @@ def gha_table(columns):
     headers = []
     rows = []
     for col in columns:
+        if "hide" in col and col["hide"] == "1":
+            continue
+
         headers.append(str(col["header"]))
         if "link" in col:
             rows.append(link(str(col["text"]), col["link"]))
@@ -185,7 +188,8 @@ def gha_check():
         },
         {
             "header": "Warning level",
-            "text": str(max_level)
+            "text": str(max_level),
+            "hide": byDefaultEnv("hideMaxLevel", '0')
         },
         {
             "header": "Status",

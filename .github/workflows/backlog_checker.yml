@@ -428,6 +428,7 @@ jobs:
           category_description: |
             These tables show the tickets that are in violation of the [SLO](https://progress.opensuse.org/projects/openqatests/wiki#SLOs-service-level-objectives)
           header: "Urgent Priority"
+          hideMaxLevel: "1"
       - name: check urgent priority jeos backlog timeout
         if: always()
         run: |
@@ -435,6 +436,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Urgent Priority: JeOS"
+          hideMaxLevel: "1"
       - name: check urgent priority SLE Micro backlog timeout
         if: always()
         run: |
@@ -442,6 +444,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Urgent Priority: SLE Micro"
+          hideMaxLevel: "1"
       - name: check urgent priority wsl backlog timeout
         if: always()
         run: |
@@ -449,6 +452,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Urgent Priority: WSL"
+          hideMaxLevel: "1"
       - name: check urgent priority public cloud backlog timeout
         if: always()
         run: |
@@ -456,6 +460,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Urgent Priority: Public Cloud"
+          hideMaxLevel: "1"
       
       # High prioities timeout
       - name: check high priority containers backlog timeout
@@ -466,6 +471,7 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "High Priority: Containers"
           header: "High Priority"
+          hideMaxLevel: "1"
       - name: check high priority jeos backlog timeout
         if: always()
         run: |
@@ -473,6 +479,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "High Priority: JeOS"
+          hideMaxLevel: "1"
       - name: check high priority SLE Micro backlog timeout
         if: always()
         run: |
@@ -480,6 +487,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "High Priority: SLE Micro"
+          hideMaxLevel: "1"
       - name: check high priority wsl backlog timeout
         if: always()
         run: |
@@ -487,6 +495,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "High Priority: WSL"
+          hideMaxLevel: "1"
       - name: check high priority public cloud backlog timeout
         if: always()
         run: |
@@ -494,6 +503,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "High Priority: Public Cloud"
+          hideMaxLevel: "1"
       
       # Normal prioities timeout
       - name: check normal priority containers backlog timeout
@@ -504,6 +514,7 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Normal Priority: Containers"
           header: "Normal Priority"
+          hideMaxLevel: "1"
       - name: check normal priority jeos backlog timeout
         if: always()
         run: |
@@ -511,6 +522,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Normal Priority: JeOS"
+          hideMaxLevel: "1"
       - name: check normal priority SLE Micro backlog timeout
         if: always()
         run: |
@@ -518,6 +530,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Normal Priority: SLE Micro"
+          hideMaxLevel: "1"
       - name: check normal priority wsl backlog timeout
         if: always()
         run: |
@@ -525,6 +538,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Normal Priority: WSL"
+          hideMaxLevel: "1"
       - name: check normal priority public cloud backlog timeout
         if: always()
         run: |
@@ -532,6 +546,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Normal Priority: Public Cloud"
+          hideMaxLevel: "1"
 
       ######################################################################
       # No changes in 15 days
@@ -551,6 +566,7 @@ jobs:
           header: "Tickets in progress with no changes in 15 days"
           header_description: |
             These tickets are in progress and we should review that because maybe have blockers or are under feedback and we forgot to update the status of the ticket.
+          hideMaxLevel: "1"
       - name: check not changed in 15 days jeos backlog length
         if: always()
         run: |
@@ -558,6 +574,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: JeOS"
+          hideMaxLevel: "1"
       - name: check not changed in 15 days SLE Micro backlog length
         if: always()
         run: |
@@ -565,6 +582,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: SLE Micro"
+          hideMaxLevel: "1"
       - name: check not changed in 15 days wsl backlog length
         if: always()
         run: |
@@ -572,6 +590,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: WSL"
+          hideMaxLevel: "1"
       - name: check not changed in 15 days public cloud backlog length
         if: always()
         run: |
@@ -579,6 +598,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: Public Cloud"
+          hideMaxLevel: "1"
 
       # No changes in 15 days (Blocked and Feedback)
       - name: check not changed in 15 days containers backlog length (Blocked and Feedback)
@@ -591,6 +611,7 @@ jobs:
           header: "Tickets with the status Blocked and Feedback with no changes in 15 days"
           header_description: |
             These tickets are in progress and we should review that because maybe what is blocking is solved. Or we need to insist when we don't have feedback.
+          hideMaxLevel: "1"
       - name: check not changed in 15 days jeos backlog length (Blocked and Feedback)
         if: always()
         run: |
@@ -598,6 +619,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: JeOS (Blocked and Feedback)"
+          hideMaxLevel: "1"
       - name: check not changed in 15 days SLE Micro backlog length (Blocked and Feedback)
         if: always()
         run: |
@@ -605,6 +627,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: SLE Micro (Blocked and Feedback)"
+          hideMaxLevel: "1"
       - name: check not changed in 15 days wsl backlog length (Blocked and Feedback)
         if: always()
         run: |
@@ -612,6 +635,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: WSL (Blocked and Feedback)"
+          hideMaxLevel: "1"
       - name: check not changed in 15 days public cloud backlog length (Blocked and Feedback)
         if: always()
         run: |
@@ -619,6 +643,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Changed: Public Cloud (Blocked and Feedback)"
+          hideMaxLevel: "1"
 
       ######################################################################
       # Abnormalities
@@ -638,6 +663,7 @@ jobs:
           header_description: |
             These are the typical tickets that due to forgetfulness are in progress but there is no assigned person. 
             If there is any clarification to be made with the person who is working with it, we need to know his name
+          hideMaxLevel: "1"
       - name: check in progress not assigned jeos backlog length
         if: always()
         run: |
@@ -645,6 +671,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Assigned: JeOS"
+          hideMaxLevel: "1"
       - name: check in progress not assigned SLE Micro backlog length
         if: always()
         run: |
@@ -652,6 +679,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Assigned: SLE Micro"
+          hideMaxLevel: "1"
       - name: check in progress not assigned wsl backlog length
         if: always()
         run: |
@@ -659,6 +687,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Assigned: WSL"
+          hideMaxLevel: "1"
       - name: check in progress not assigned cloud backlog length
         if: always()
         run: |
@@ -666,6 +695,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Not Assigned: Public Cloud"
+          hideMaxLevel: "1"
 
       # Assigned but not started
       - name: check in progress assigned but not started containers backlog length
@@ -680,6 +710,7 @@ jobs:
             Some tickets could be blocked by a teammate for a time assigned to him but not started. This option is considered, 
             but care must be taken if too much time has passed or if the person is on sick leave or on vacation. 
             This would mean that the task is effectively blocked
+          hideMaxLevel: "1"
       - name: check in progress assigned but not started jeos backlog length
         if: always()
         run: |
@@ -687,6 +718,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Assigned but not started: JeOS"
+          hideMaxLevel: "1"
       - name: check in progress assigned but not started SLE Micro backlog length
         if: always()
         run: |
@@ -694,6 +726,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Assigned but not started: SLE Micro"
+          hideMaxLevel: "1"
       - name: check in progress assigned but not started wsl backlog length
         if: always()
         run: |
@@ -701,6 +734,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Assigned but not started: WSL"
+          hideMaxLevel: "1"
       - name: check in progress assigned but not started public cloud backlog length
         if: always()
         run: |
@@ -708,6 +742,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Assigned but not started: Public Cloud"
+          hideMaxLevel: "1"
 
       # New tickets
       - name: check new containers backlog length
@@ -720,6 +755,7 @@ jobs:
           header: "New tickets"
           header_description: |
             New tickets that are not workable and need clarification should be reviewed during the refinement meeting.
+          hideMaxLevel: "1"
       - name: check new jeos backlog length
         if: always()
         run: |
@@ -727,6 +763,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "New: JeOS"
+          hideMaxLevel: "1"
       - name: check new SLE Micro backlog length
         if: always()
         run: |
@@ -734,6 +771,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "New: SLE Micro"
+          hideMaxLevel: "1"
       - name: check new wsl backlog length
         if: always()
         run: |
@@ -741,6 +779,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "New: WSL"
+          hideMaxLevel: "1"
       - name: check new public cloud backlog length
         if: always()
         run: |
@@ -748,6 +787,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "New: Public Cloud"
+          hideMaxLevel: "1"
 
       # Coordination without subtasks
       - name: check in progress coordination without subtasks containers backlog length
@@ -761,6 +801,7 @@ jobs:
           header_description: |
             Epics can be defined to record a new line of work in a project. 
             Initially these epics may not have tasks assigned to them. This table is a reminder for the PO
+          hideMaxLevel: "1"
       - name: check in progress coordination without subtasks jeos backlog length
         if: always()
         run: |
@@ -768,6 +809,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Coordination with no subtasks: JeOS"
+          hideMaxLevel: "1"
       - name: check in progress coordination without subtasks SLE Micro backlog length
         if: always()
         run: |
@@ -775,6 +817,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Coordination with no subtasks: SLE Micro"
+          hideMaxLevel: "1"
       - name: check in progress coordination without subtasks wsl backlog length
         if: always()
         run: |
@@ -782,6 +825,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Coordination with no subtasks: WSL"
+          hideMaxLevel: "1"
       - name: check in progress coordination without subtasks public cloud backlog length
         if: always()
         run: |
@@ -789,6 +833,7 @@ jobs:
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Coordination with no subtasks: Public Cloud"
+          hideMaxLevel: "1"
 
       # Epics
       - name: check container epics
