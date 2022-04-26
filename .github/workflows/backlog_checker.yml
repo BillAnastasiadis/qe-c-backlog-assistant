@@ -890,6 +890,58 @@ jobs:
           header: "Public Cloud Epics"
 
 
+      # Aging
+      - name: aging containers
+        if: always()
+        run: |
+          python backlog_checker.py aging tb_start
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Finished In The Last 30 Days: Containers"
+          header: "Aging tickets finished in the last 30 days"
+          category: "Aging of tickets"
+          category_description: |
+            Mesures the time since the ticket is created and the ticket is resolved
+          rowText: "Containers"
+          head: "Days to complete (Adv)"
+      - name: aging JeOS
+        if: always()
+        run: |
+          python backlog_checker.py aging
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Finished In The Last 30 Days: JeOS"
+          rowText: "JeOS"
+          head: "Days to complete (Adv)"
+      - name: aging WSL
+        if: always()
+        run: |
+          python backlog_checker.py aging
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Finished In The Last 30 Days: WSL"
+          rowText: "WSL"
+          head: "Days to complete (Adv)"
+      - name: aging Public Cloud
+        if: always()
+        run: |
+          python backlog_checker.py aging
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Finished In The Last 30 Days: Public Cloud"
+          rowText: "Public Cloud"
+          head: "Days to complete (Adv)"
+      - name: aging SLE Micro
+        if: always()
+        run: |
+          python backlog_checker.py aging tb_end
+        env:
+          key: ${{ secrets.REDMINE_API_KEY }}
+          query: "Finished In The Last 30 Days: SLE Micro"
+          rowText: "SLE Micro"
+          head: "Days to complete (Adv)"
+      
+
       - name: Footer
         if: always()
         run: |
