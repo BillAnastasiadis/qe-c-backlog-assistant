@@ -311,6 +311,34 @@ def gha_epics():
         table_end_to_md()
         print_footer()
 
+def gha_aging():
+    initialize_queries()
+
+    root = query_base(os.environ['query'])
+
+    sum = 0
+    count = 0
+    for i in root['issues']:
+        created_on = datetime.strptime(i['created_on'], '%Y-%m-%dT%H:%M:%SZ').timestamp()
+        closed_on = datetime.strptime(i['closed_on'], '%Y-%m-%dT%H:%M:%SZ').timestamp()
+        difference = (closed_on - created_on) / (60*60*24)
+        sum = sum + difference
+        count = count + 1
+
+    adv = sum / count
+    
+    gha_table([
+        {
+            "header": "Backlog Query",
+            "text": os.environ["rowText"]
+        },
+        {
+            "header": os.environ['head'],
+            "text": str(adv),
+            "link": query_links[os.environ['query']]
+        }
+    ])
+
 def gha_description():
     text = os.environ['text']
     toMD(text)
@@ -325,5 +353,7 @@ elif "comp2" in sys.argv:
     gha_comp_2()
 elif "description" in sys.argv:
     gha_description()
+elif "aging" in sys.argv:
+    gha_aging()
 else:
     gha_check()
