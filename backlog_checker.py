@@ -219,15 +219,18 @@ def gha_comp():
         },
         {
             "header": os.environ['head1'],
-            "text": str(issue_count_1)
+            "text": str(issue_count_1),
+            "link": query_links[os.environ['query1']]
         },
         {
             "header": os.environ['head2'],
-            "text": str(issue_count_2)
+            "text": str(issue_count_2),
+            "link": query_links[os.environ['query2']]
         },
         {
             "header": os.environ['head3'],
-            "text": str(issue_count_3)
+            "text": str(issue_count_3),
+            "link": query_links[os.environ['query3']]
         },
         {
             "header": "Status",
