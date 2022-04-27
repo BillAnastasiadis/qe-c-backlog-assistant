@@ -903,7 +903,7 @@ jobs:
           category_description: |
             Mesures the time since the ticket is created and the ticket is resolved
           rowText: "Containers"
-          head: "Days to complete (Adv)"
+          head: "Days to complete"
       - name: aging JeOS
         if: always()
         run: |
@@ -912,7 +912,7 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Finished In The Last 30 Days: JeOS"
           rowText: "JeOS"
-          head: "Days to complete (Adv)"
+          head: "Days to complete"
       - name: aging WSL
         if: always()
         run: |
@@ -921,7 +921,7 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Finished In The Last 30 Days: WSL"
           rowText: "WSL"
-          head: "Days to complete (Adv)"
+          head: "Days to complete"
       - name: aging Public Cloud
         if: always()
         run: |
@@ -930,7 +930,7 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Finished In The Last 30 Days: Public Cloud"
           rowText: "Public Cloud"
-          head: "Days to complete (Adv)"
+          head: "Days to complete"
       - name: aging SLE Micro
         if: always()
         run: |
@@ -939,7 +939,7 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Finished In The Last 30 Days: SLE Micro"
           rowText: "SLE Micro"
-          head: "Days to complete (Adv)"
+          head: "Days to complete"
       
 
       - name: Footer

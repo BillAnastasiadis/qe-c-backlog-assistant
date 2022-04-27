@@ -4,6 +4,7 @@ import json
 from datetime import datetime, timedelta
 from inspect import getmembers, isfunction
 import requests
+import math
 
 # Icons used for PASS or FAIL in the md file
 result_icons = {"pass": "&#x1F49A;", "fail": "&#x1F534;", "review": "&#x1f448;"}
@@ -318,24 +319,42 @@ def gha_aging():
 
     sum = 0
     count = 0
+    values = []
     for i in root['issues']:
         created_on = datetime.strptime(i['created_on'], '%Y-%m-%dT%H:%M:%SZ').timestamp()
         closed_on = datetime.strptime(i['closed_on'], '%Y-%m-%dT%H:%M:%SZ').timestamp()
         difference = (closed_on - created_on) / (60*60*24)
         sum = sum + difference
         count = count + 1
+        values.append(difference)
 
+    values = sorted(values)
     adv = sum / count
+    if len(values) > 0:
+        median = values[round(len(values)/2)]
+    
+    std_deviation = 0
+    for v in values:
+        std_deviation = std_deviation = (v - adv) * (v - adv)
+    std_deviation = math.sqrt(std_deviation) / count
     
     gha_table([
         {
             "header": "Backlog Query",
-            "text": os.environ["rowText"]
+            "text": os.environ["rowText"],
+            "link": query_links[os.environ['query']]
         },
         {
-            "header": os.environ['head'],
-            "text": str(adv),
-            "link": query_links[os.environ['query']]
+            "header": os.environ['head'] + " (Adv)",
+            "text": str(round(adv))
+        },
+        {
+            "header": os.environ['head'] + " (Median)",
+            "text": str(round(median))
+        },
+        {
+            "header": os.environ['head'] + " (Std deviation)",
+            "text": str(round(std_deviation))
         }
     ])
 
