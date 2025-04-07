@@ -15,10 +15,7 @@ def initialize_queries():
     with open("queries.txt", "r") as qr:
         for q in qr.readlines():
             k, v = q.split("|", 1)
-            # print(k)
-            # print(v)
             query_links[k] = v.strip("\n")
-
 
 # Initialize a blank md file to replace the current README
 def initialize_md():
