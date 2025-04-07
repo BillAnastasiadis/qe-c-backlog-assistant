@@ -34,9 +34,9 @@ jobs:
           python backlog_checker.py description
         env:
           text: |
-            This is the dashboard for Quality Engineering for Containers and Public Cloud.
+            This is the dashboard for Quality Engineering for Containers, Images and Public Cloud.
 
-            We are currently working on four projects: Containers, JeOS, WSL, Public Cloud and SLE Micro
+            We are currently working on four projects: Containers & Images and Public Cloud
             * [General team overview](#general_team_overview)
               * [Bugs vs Features Backlog Length](#bugs_vs_features_backlog_length)
               * [Incoming vs outcoming during the last 30 days](#incoming_vs_outcoming_during_the_last_30_days)
@@ -68,62 +68,23 @@ jobs:
           header_description: |
             This table compares the number of bugs against the planned tickets.          
           key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "Containers"
-          query1: "Backlog Bugs Length: Containers"
-          query2: "Backlog Features Length: Containers"
-          query3: "Backlog Length: Containers"
-          head1: "Bugs"
-          head2: "Features"
-          head3: "Total"
-      - name: Bugs vs Features Backlog Length JeOS
-        if: always()
-        run: |
-          python backlog_checker.py comp2
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "JeOS"
-          query1: "Backlog Bugs Length: JeOS"
-          query2: "Backlog Features Length: JeOS"
-          query3: "Backlog Length: JeOS"
-          head1: "Bugs"
-          head2: "Features"
-          head3: "Total"
-      - name: Bugs vs Features Backlog Length WSL
-        if: always()
-        run: |
-          python backlog_checker.py comp2
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "WSL"
-          query1: "Backlog Bugs Length: WSL"
-          query2: "Backlog Features Length: WSL"
-          query3: "Backlog Length: WSL"
+          rowText: "Containers & Images"
+          query1: "Backlog Bugs Length: Containers & Images"
+          query2: "Backlog Features Length: Containers & Images"
+          query3: "Backlog Length: Containers & Images"
           head1: "Bugs"
           head2: "Features"
           head3: "Total"
       - name: Bugs vs Features Backlog Length Public Cloud
         if: always()
         run: |
-          python backlog_checker.py comp2
+          python backlog_checker.py comp2 tb_end
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "Public Cloud"
           query1: "Backlog Bugs Length: Public Cloud"
           query2: "Backlog Features Length: Public Cloud"
           query3: "Backlog Length: Public Cloud"
-          head1: "Bugs"
-          head2: "Features"
-          head3: "Total"
-      - name: Bugs vs Features Backlog Length SLE Micro
-        if: always()
-        run: |
-          python backlog_checker.py comp2 tb_end
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "SLE Micro"
-          query1: "Backlog Bugs Length: SLE Micro"
-          query2: "Backlog Features Length: SLE Micro"
-          query3: "Backlog Length: SLE Micro"
           head1: "Bugs"
           head2: "Features"
           head3: "Total"
@@ -143,42 +104,16 @@ jobs:
             Two time ranges are contemplated, short-term (30 days) and medium-term (4 months)
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "Containers"
-          query1: "Created In The Last 30 Days: Containers"
-          query2: "Finished In The Last 30 Days: Containers"
+          query1: "Created In The Last 30 Days: Containers & Images"
+          query2: "Finished In The Last 30 Days: Containers & Images"
           query3: "Backlog Length: Containers"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-      - name: Input vs Output ratios in 30 days JeOS
-        if: always()
-        run: |
-          python backlog_checker.py comp 
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "JeOS"
-          query1: "Created In The Last 30 Days: JeOS"
-          query2: "Finished In The Last 30 Days: JeOS"
-          query3: "Backlog Length: JeOS"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-      - name: Input vs Output ratios in 30 days WSL
-        if: always()
-        run: |
-          python backlog_checker.py comp 
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "WSL"
-          query1: "Created In The Last 30 Days: WSL"
-          query2: "Finished In The Last 30 Days: WSL"
-          query3: "Backlog Length: WSL"
           head1: "New tickets"
           head2: "Finished tickets"
           head3: "Backlog length"
       - name: Input vs Output ratios in 30 days Public Cloud
         if: always()
         run: |
-          python backlog_checker.py comp 
+          python backlog_checker.py comp tb_end
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "Public Cloud"
@@ -188,20 +123,6 @@ jobs:
           head1: "New tickets"
           head2: "Finished tickets"
           head3: "Backlog length"
-      - name: Input vs Output ratios in 30 days SLE Micro
-        if: always()
-        run: |
-          python backlog_checker.py comp tb_end
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "SLE Micro"
-          query1: "Created In The Last 30 Days: SLE Micro"
-          query2: "Finished In The Last 30 Days: SLE Micro"
-          query3: "Backlog Length: SLE Micro"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-
 
       # Incoming vs outcoming during the last 4 months
       - name: Input vs Output ratios in 4 months Containers
@@ -212,61 +133,22 @@ jobs:
           header: "Incoming vs outcoming during the last 4 months"
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "Containers"
-          query1: "Created In The Last 120 Days: Containers"
-          query2: "Finished In The Last 120 Days: Containers"
-          query3: "Backlog Length: Containers"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-      - name: Input vs Output ratios in 4 months JeOS
-        if: always()
-        run: |
-          python backlog_checker.py comp 
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "JeOS"
-          query1: "Created In The Last 120 Days: JeOS"
-          query2: "Finished In The Last 120 Days: JeOS"
-          query3: "Backlog Length: JeOS"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-      - name: Input vs Output ratios in 4 months WSL
-        if: always()
-        run: |
-          python backlog_checker.py comp 
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "WSL"
-          query1: "Created In The Last 120 Days: WSL"
-          query2: "Finished In The Last 120 Days: WSL"
-          query3: "Backlog Length: WSL"
+          query1: "Created In The Last 120 Days: Containers & Images"
+          query2: "Finished In The Last 120 Days: Containers & Images"
+          query3: "Backlog Length: Containers & Images"
           head1: "New tickets"
           head2: "Finished tickets"
           head3: "Backlog length"
       - name: Input vs Output ratios in 4 months Public Cloud
         if: always()
         run: |
-          python backlog_checker.py comp 
+          python backlog_checker.py comp tb_end
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
           rowText: "Public Cloud"
           query1: "Created In The Last 120 Days: Public Cloud"
           query2: "Finished In The Last 120 Days: Public Cloud"
           query3: "Backlog Length: Public Cloud"
-          head1: "New tickets"
-          head2: "Finished tickets"
-          head3: "Backlog length"
-      - name: Input vs Output ratios in 4 months SLE Micro
-        if: always()
-        run: |
-          python backlog_checker.py comp tb_end
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          rowText: "SLE Micro"
-          query1: "Created In The Last 120 Days: SLE Micro"
-          query2: "Finished In The Last 120 Days: SLE Micro"
-          query3: "Backlog Length: SLE Micro"
           head1: "New tickets"
           head2: "Finished tickets"
           head3: "Backlog length"
@@ -282,7 +164,7 @@ jobs:
           python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Urgent Priority Length: Containers"
+          query: "Urgent Priority Length: Containers & Images"
           header: "Containers"
           category: "Backlog Lengths by priority"
           category_description: |
@@ -294,7 +176,7 @@ jobs:
           python backlog_checker.py
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "High Priority Length: Containers"
+          query: "High Priority Length: Containers & Images"
           max_level: 3
       - name: check normal priority containers backlog length
         if: always()
@@ -302,88 +184,7 @@ jobs:
           python backlog_checker.py tb_end
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Normal Priority Length: Containers"
-          max_level: 20
-
-      # Backlog lengths : JeOS
-      - name: check urgent priority JeOS backlog length
-        if: always()
-        run: |
-          python backlog_checker.py tb_start
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Urgent Priority Length: JeOS"
-          header: "JeOS"
-          max_level: 1
-      - name: check high priority JeOS backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "High Priority Length: JeOS"
-          max_level: 3
-      - name: check normal priority JeOS backlog length
-        if: always()
-        run: |
-          python backlog_checker.py tb_end
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Normal Priority Length: JeOS"
-          max_level: 20
-
-      # Backlog lengths : WSL
-      - name: check urgent priority WSL backlog length
-        if: always()
-        run: |
-          python backlog_checker.py tb_start
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Urgent Priority Length: WSL"
-          header: "WSL"
-          max_level: 1
-      - name: check high priority WSL backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "High Priority Length: WSL"
-          max_level: 3
-      - name: check normal priority WSL backlog length
-        if: always()
-        run: |
-          python backlog_checker.py tb_end
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Normal Priority Length: WSL"
-          max_level: 20
-
-      # Backlog lengths : SLE Micro
-      - name: check urgent priority SLE Micro backlog length
-        if: always()
-        run: |
-          python backlog_checker.py tb_start
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Urgent Priority Length: SLE Micro"
-          header: "SLE Micro"
-          max_level: 1
-      - name: check high priority SLE Micro backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "High Priority Length: SLE Micro"
-          max_level: 3
-      - name: check normal priority SLE Micro backlog length
-        if: always()
-        run: |
-          python backlog_checker.py tb_end
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Normal Priority Length: SLE Micro"
+          query: "Normal Priority Length: Containers & Images"
           max_level: 20
 
       # Backlog lengths : Public Cloud
@@ -424,35 +225,11 @@ jobs:
           python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Urgent Priority: Containers"
+          query: "Urgent Priority: Containers & Images"
           category: "Pickup time alerts"
           category_description: |
             These tables show the tickets that are in violation of the [SLO](https://progress.opensuse.org/projects/openqatests/wiki#SLOs-service-level-objectives)
           header: "Urgent Priority"
-          hideMaxLevel: "1"
-      - name: check urgent priority jeos backlog timeout
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Urgent Priority: JeOS"
-          hideMaxLevel: "1"
-      - name: check urgent priority SLE Micro backlog timeout
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Urgent Priority: SLE Micro"
-          hideMaxLevel: "1"
-      - name: check urgent priority wsl backlog timeout
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Urgent Priority: WSL"
           hideMaxLevel: "1"
       - name: check urgent priority public cloud backlog timeout
         if: always()
@@ -470,32 +247,8 @@ jobs:
           python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "High Priority: Containers"
+          query: "High Priority: Containers & Images"
           header: "High Priority"
-          hideMaxLevel: "1"
-      - name: check high priority jeos backlog timeout
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "High Priority: JeOS"
-          hideMaxLevel: "1"
-      - name: check high priority SLE Micro backlog timeout
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "High Priority: SLE Micro"
-          hideMaxLevel: "1"
-      - name: check high priority wsl backlog timeout
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "High Priority: WSL"
           hideMaxLevel: "1"
       - name: check high priority public cloud backlog timeout
         if: always()
@@ -513,32 +266,8 @@ jobs:
           python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Normal Priority: Containers"
+          query: "Normal Priority: Containers & Images"
           header: "Normal Priority"
-          hideMaxLevel: "1"
-      - name: check normal priority jeos backlog timeout
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Normal Priority: JeOS"
-          hideMaxLevel: "1"
-      - name: check normal priority SLE Micro backlog timeout
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Normal Priority: SLE Micro"
-          hideMaxLevel: "1"
-      - name: check normal priority wsl backlog timeout
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Normal Priority: WSL"
           hideMaxLevel: "1"
       - name: check normal priority public cloud backlog timeout
         if: always()
@@ -560,37 +289,13 @@ jobs:
           python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: Containers"
+          query: "Not Changed: Containers & Images"
           category: "Non updated tickets for 15 days"
           category_description: |
             These tables show the tickets that have more than 15 days without any update
           header: "Tickets in progress with no changes in 15 days"
           header_description: |
             These tickets are in progress and we should review that because maybe have blockers or are under feedback and we forgot to update the status of the ticket.
-          hideMaxLevel: "1"
-      - name: check not changed in 15 days jeos backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: JeOS"
-          hideMaxLevel: "1"
-      - name: check not changed in 15 days SLE Micro backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: SLE Micro"
-          hideMaxLevel: "1"
-      - name: check not changed in 15 days wsl backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: WSL"
           hideMaxLevel: "1"
       - name: check not changed in 15 days public cloud backlog length
         if: always()
@@ -608,34 +313,10 @@ jobs:
           python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: Containers (Blocked and Feedback)"
+          query: "Not Changed: Containers & Images (Blocked and Feedback)"
           header: "Tickets with the status Blocked and Feedback with no changes in 15 days"
           header_description: |
             These tickets are in progress and we should review that because maybe what is blocking is solved. Or we need to insist when we don't have feedback.
-          hideMaxLevel: "1"
-      - name: check not changed in 15 days jeos backlog length (Blocked and Feedback)
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: JeOS (Blocked and Feedback)"
-          hideMaxLevel: "1"
-      - name: check not changed in 15 days SLE Micro backlog length (Blocked and Feedback)
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: SLE Micro (Blocked and Feedback)"
-          hideMaxLevel: "1"
-      - name: check not changed in 15 days wsl backlog length (Blocked and Feedback)
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Changed: WSL (Blocked and Feedback)"
           hideMaxLevel: "1"
       - name: check not changed in 15 days public cloud backlog length (Blocked and Feedback)
         if: always()
@@ -656,7 +337,7 @@ jobs:
           python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Assigned: Containers"
+          query: "Not Assigned: Containers & Images"
           category: "Abnormalities"
           category_description: |
             These tickets has some kind of abnormality, and should be alerted to the team and reviewed
@@ -664,30 +345,6 @@ jobs:
           header_description: |
             These are the typical tickets that due to forgetfulness are in progress but there is no assigned person. 
             If there is any clarification to be made with the person who is working with it, we need to know his name
-          hideMaxLevel: "1"
-      - name: check in progress not assigned jeos backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Assigned: JeOS"
-          hideMaxLevel: "1"
-      - name: check in progress not assigned SLE Micro backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Assigned: SLE Micro"
-          hideMaxLevel: "1"
-      - name: check in progress not assigned wsl backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Not Assigned: WSL"
           hideMaxLevel: "1"
       - name: check in progress not assigned cloud backlog length
         if: always()
@@ -705,36 +362,12 @@ jobs:
           python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Assigned but not started: Containers"
+          query: "Assigned but not started: Containers & Images"
           header: "Assigned but not started"
           header_description: |
             Some tickets could be blocked by a teammate for a time assigned to him but not started. This option is considered, 
             but care must be taken if too much time has passed or if the person is on sick leave or on vacation. 
             This would mean that the task is effectively blocked
-          hideMaxLevel: "1"
-      - name: check in progress assigned but not started jeos backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Assigned but not started: JeOS"
-          hideMaxLevel: "1"
-      - name: check in progress assigned but not started SLE Micro backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Assigned but not started: SLE Micro"
-          hideMaxLevel: "1"
-      - name: check in progress assigned but not started wsl backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Assigned but not started: WSL"
           hideMaxLevel: "1"
       - name: check in progress assigned but not started public cloud backlog length
         if: always()
@@ -752,40 +385,10 @@ jobs:
           python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "New: Containers"
+          query: "New: Containers & Images"
           header: "New tickets"
           header_description: |
             New tickets that are not workable and need clarification should be reviewed during the refinement meeting.
-          hideMaxLevel: "1"
-          failIcon: "review"
-          passIcon: ""
-      - name: check new jeos backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "New: JeOS"
-          hideMaxLevel: "1"
-          failIcon: "review"
-          passIcon: ""
-      - name: check new SLE Micro backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "New: SLE Micro"
-          hideMaxLevel: "1"
-          failIcon: "review"
-          passIcon: ""
-      - name: check new wsl backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "New: WSL"
           hideMaxLevel: "1"
           failIcon: "review"
           passIcon: ""
@@ -807,35 +410,11 @@ jobs:
           python backlog_checker.py tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Coordination with no subtasks: Containers"
+          query: "Coordination with no subtasks: Containers & Images"
           header: "Coordination without subtasks"
           header_description: |
             Epics can be defined to record a new line of work in a project. 
             Initially these epics may not have tasks assigned to them. This table is a reminder for the PO
-          hideMaxLevel: "1"
-      - name: check in progress coordination without subtasks jeos backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Coordination with no subtasks: JeOS"
-          hideMaxLevel: "1"
-      - name: check in progress coordination without subtasks SLE Micro backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Coordination with no subtasks: SLE Micro"
-          hideMaxLevel: "1"
-      - name: check in progress coordination without subtasks wsl backlog length
-        if: always()
-        run: |
-          python backlog_checker.py
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Coordination with no subtasks: WSL"
           hideMaxLevel: "1"
       - name: check in progress coordination without subtasks public cloud backlog length
         if: always()
@@ -853,33 +432,9 @@ jobs:
           python backlog_checker.py epic
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Epics Containers"
+          query: "Epics Containers & Images"
           category: "Epics"
-          header: "Container Epics"
-      - name: check jeos epics
-        if: always()
-        run: |
-          python backlog_checker.py epic
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Epics JeOS"
-          header: "JeOS Epics"
-      - name: check SLE Micro epics
-        if: always()
-        run: |
-          python backlog_checker.py epic
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Epics SLE Micro"
-          header: "SLE Micro Epics"
-      - name: check wsl epics
-        if: always()
-        run: |
-          python backlog_checker.py epic
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Epics WSL"
-          header: "WSL Epics"
+          header: "Container & Images Epics"
       - name: check public cloud epics
         if: always()
         run: |
@@ -897,30 +452,12 @@ jobs:
           python backlog_checker.py aging tb_start
         env:
           key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Finished In The Last 30 Days: Containers"
+          query: "Finished In The Last 30 Days: Containers & Images"
           header: "Aging tickets finished in the last 30 days"
           category: "Aging of tickets"
           category_description: |
             Mesures the time since the ticket is created and the ticket is resolved
-          rowText: "Containers"
-          head: "Days to complete"
-      - name: aging JeOS
-        if: always()
-        run: |
-          python backlog_checker.py aging
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Finished In The Last 30 Days: JeOS"
-          rowText: "JeOS"
-          head: "Days to complete"
-      - name: aging WSL
-        if: always()
-        run: |
-          python backlog_checker.py aging
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Finished In The Last 30 Days: WSL"
-          rowText: "WSL"
+          rowText: "Containers & Images"
           head: "Days to complete"
       - name: aging Public Cloud
         if: always()
@@ -930,15 +467,6 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           query: "Finished In The Last 30 Days: Public Cloud"
           rowText: "Public Cloud"
-          head: "Days to complete"
-      - name: aging SLE Micro
-        if: always()
-        run: |
-          python backlog_checker.py aging tb_end
-        env:
-          key: ${{ secrets.REDMINE_API_KEY }}
-          query: "Finished In The Last 30 Days: SLE Micro"
-          rowText: "SLE Micro"
           head: "Days to complete"
       
 
@@ -951,11 +479,8 @@ jobs:
             # Other links
 
             **Finished tickets this week**
-            * [Containers](https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=priority%3Adesc%2Cid%3Adesc&f%5B%5D=closed_on&op%5Bclosed_on%5D=w&f%5B%5D=&c%5B%5D=subject&c%5B%5D=project&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=relations&c%5B%5D=parent&c%5B%5D=tags_relations&c%5B%5D=updated_on&group_by=status&t%5B%5D=)
-            * [JeOS](https://progress.opensuse.org/projects/jeos/issues?utf8=%E2%9C%93&set_filter=1&sort=priority%3Adesc%2Cid%3Adesc&f%5B%5D=closed_on&op%5Bclosed_on%5D=w&f%5B%5D=&c%5B%5D=subject&c%5B%5D=project&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=relations&c%5B%5D=parent&c%5B%5D=tags_relations&c%5B%5D=updated_on&group_by=status&t%5B%5D=)
-            * [WSL](https://progress.opensuse.org/projects/wsl/issues?utf8=%E2%9C%93&set_filter=1&sort=priority%3Adesc%2Cid%3Adesc&f%5B%5D=closed_on&op%5Bclosed_on%5D=w&f%5B%5D=&c%5B%5D=subject&c%5B%5D=project&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=relations&c%5B%5D=parent&c%5B%5D=tags_relations&c%5B%5D=updated_on&group_by=status&t%5B%5D=)
+            * [Containers & Images](https://progress.opensuse.org/projects/containers/issues?utf8=%E2%9C%93&set_filter=1&sort=priority%3Adesc%2Cid%3Adesc&f%5B%5D=closed_on&op%5Bclosed_on%5D=w&f%5B%5D=&c%5B%5D=subject&c%5B%5D=project&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=relations&c%5B%5D=parent&c%5B%5D=tags_relations&c%5B%5D=updated_on&group_by=status&t%5B%5D=)
             * [Public Cloud](https://progress.opensuse.org/projects/public_cloud/issues?utf8=%E2%9C%93&set_filter=1&sort=priority%3Adesc%2Cid%3Adesc&f%5B%5D=closed_on&op%5Bclosed_on%5D=w&f%5B%5D=&c%5B%5D=subject&c%5B%5D=project&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=relations&c%5B%5D=parent&c%5B%5D=tags_relations&c%5B%5D=updated_on&group_by=status&t%5B%5D=)
-            * [SLE Micro](https://progress.opensuse.org/projects/microos_slemicro/issues?utf8=%E2%9C%93&set_filter=1&sort=priority%3Adesc%2Cid%3Adesc&f%5B%5D=closed_on&op%5Bclosed_on%5D=w&f%5B%5D=&c%5B%5D=subject&c%5B%5D=project&c%5B%5D=status&c%5B%5D=priority&c%5B%5D=author&c%5B%5D=assigned_to&c%5B%5D=relations&c%5B%5D=parent&c%5B%5D=tags_relations&c%5B%5D=updated_on&group_by=status&t%5B%5D=)
         
       # Commit
       - name: Commit files
